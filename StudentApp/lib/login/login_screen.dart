@@ -1,4 +1,5 @@
 import 'package:StudentApp/components/roundedButton.dart';
+import 'package:StudentApp/main_pages/page_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:StudentApp/constants.dart';
 
@@ -54,7 +55,9 @@ class _LoginScreenState extends State<LoginScreen> {
             RoundedButton(
               title: 'Log In',
               color: Colors.lightBlueAccent,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, PageLogic.id);
+              },
             )
           ],
         ),
