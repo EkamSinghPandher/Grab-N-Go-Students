@@ -1,4 +1,3 @@
-import 'package:StudentApp/Services/auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -71,8 +70,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            Center(
-          child: FlatButton(onPressed: () =>AuthService().signOut(), child: Text('Sign Out'))),
           ],
         ),
       ),

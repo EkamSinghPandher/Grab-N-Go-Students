@@ -1,5 +1,5 @@
 import 'package:StudentApp/Models/Student.dart';
-import 'package:StudentApp/main_pages/bottom_bar.dart';
+import 'package:StudentApp/main_pages/Home_Screen/page_logic.dart';
 import 'package:StudentApp/main_pages/login/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

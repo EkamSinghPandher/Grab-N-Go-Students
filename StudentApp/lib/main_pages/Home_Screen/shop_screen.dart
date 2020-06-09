@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:StudentApp/constants.dart';
+import 'package:StudentApp/components/locations.dart';
 
-class OrdersScreen extends StatefulWidget {
+class ShopScreen extends StatefulWidget {
   @override
-  _OrdersScreenState createState() => _OrdersScreenState();
+  _ShopScreenState createState() => _ShopScreenState();
 }
 
-class _OrdersScreenState extends State<OrdersScreen> {
+class _ShopScreenState extends State<ShopScreen> {
   String foodOrLocation;
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 //Implement logout functionality
               }),
         ],
-        title: Text('Orders'),
+        title: Text('Shop'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(
@@ -33,6 +34,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 style: TextStyle(
                   color: Colors.black,
                 ),
+                decoration: kInputDecoration,
                 onChanged: (value) {
                   setState(() {
                     foodOrLocation = value;
@@ -49,6 +51,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             ),
             Container(
               height: 370.0,
+              child: Locations(),
             )
           ],
         ),

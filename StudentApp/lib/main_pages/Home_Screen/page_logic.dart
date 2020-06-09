@@ -1,7 +1,7 @@
+import 'package:StudentApp/main_pages/Home_Screen/history_screen.dart';
 import 'package:StudentApp/main_pages/Home_Screen/home_screen.dart';
-import 'package:StudentApp/main_pages/messages_screen.dart';
-import 'package:StudentApp/main_pages/profile_screen.dart';
-import 'package:StudentApp/main_pages/orders_screen.dart';
+import 'package:StudentApp/main_pages/Home_Screen/profile_screen.dart';
+import 'package:StudentApp/main_pages/Home_Screen/shop_screen.dart';
 import 'package:flutter/material.dart';
 
 class PageLogic extends StatefulWidget {
@@ -14,8 +14,8 @@ class _PageLogicState extends State<PageLogic> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomeScreen(),
-    OrdersScreen(),
-    MessagesScreen(),
+    ShopScreen(),
+    HistoryScreen(),
     ProfileScreen(),
   ];
 
@@ -32,12 +32,12 @@ class _PageLogicState extends State<PageLogic> {
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.collections_bookmark),
-            title: Text('Orders'),
+            icon: Icon(Icons.shopping_basket),
+            title: Text('Shops'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.speaker_notes),
-            title: Text('Messages'),
+            title: Text('History'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

@@ -5,7 +5,7 @@ import 'package:StudentApp/main_pages/login/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Models/Student.dart';
-import 'main_pages/bottom_bar.dart';
+import 'package:StudentApp/main_pages/Home_Screen/page_logic.dart';
 import 'main_pages/login/Wrapper.dart';
 
 void main() {
@@ -16,8 +16,8 @@ class GrabNGo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<Student>.value(
-          value: AuthService().user,
-          child: MaterialApp(
+      value: AuthService().user,
+      child: MaterialApp(
         home: Wrapper(),
         routes: {
           Wrapper.id: (context) => Wrapper(),

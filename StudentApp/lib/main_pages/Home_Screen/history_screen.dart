@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MessagesScreen extends StatefulWidget {
+class HistoryScreen extends StatefulWidget {
   @override
-  _MessagesScreenState createState() => _MessagesScreenState();
+  _HistoryScreenState createState() => _HistoryScreenState();
 }
 
-class _MessagesScreenState extends State<MessagesScreen> {
+class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +18,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 //Implement logout functionality
               }),
         ],
-        title: Text('Messages'),
+        title: Text('History'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(
