@@ -1,3 +1,4 @@
+import 'package:StudentApp/components/dataSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:StudentApp/constants.dart';
 import 'package:StudentApp/components/locations.dart';
@@ -16,9 +17,9 @@ class _ShopScreenState extends State<ShopScreen> {
         leading: null,
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.close),
+              icon: Icon(Icons.search),
               onPressed: () {
-                //Implement logout functionality
+                showSearch(context: context, delegate: DataSearch());
               }),
         ],
         title: Text('Shop'),
@@ -28,7 +29,7 @@ class _ShopScreenState extends State<ShopScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            /*Container(
               padding: EdgeInsets.all(20.0),
               child: TextField(
                 style: TextStyle(
@@ -41,10 +42,7 @@ class _ShopScreenState extends State<ShopScreen> {
                   });
                 },
               ),
-            ),
-            Center(
-              child: Text('he searched up $foodOrLocation'),
-            ),
+            ),*/
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text('Locations'),

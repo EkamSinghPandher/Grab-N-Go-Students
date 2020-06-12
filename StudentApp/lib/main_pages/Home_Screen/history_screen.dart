@@ -1,3 +1,4 @@
+import 'package:StudentApp/components/historyTile.dart';
 import 'package:StudentApp/main_pages/Home_Screen/current_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -55,8 +56,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 ],
               ),
             ),
-            Center(
-              child: Text('This is History Page'),
+            SizedBox(
+              height: 15.0,
+            ),
+            HistoryTile(
+              userName: "George",
+              userEmail: "george@email.com",
+            ),
+            HistoryTile(
+              userName: "Jason",
+              userEmail: "jazzon@email.com",
             ),
           ],
         ),
