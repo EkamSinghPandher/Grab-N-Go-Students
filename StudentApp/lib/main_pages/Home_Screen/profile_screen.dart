@@ -1,5 +1,7 @@
+import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -9,6 +11,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    Student student = Provider.of<Student>(context);
     return Scaffold(
       appBar: AppBar(
         leading: null,
@@ -40,28 +43,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               child: ListTile(
                 leading: Icon(
-                  Icons.phone,
-                  color: Colors.blue.shade700,
-                ),
-                title: Text(
-                  '+65 91234567',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.blue.shade700,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-            ),
-            Card(
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              child: ListTile(
-                leading: Icon(
                   Icons.email,
                   color: Colors.blue.shade700,
                 ),
                 title: Text(
-                  'nus-student@gmail.com',
+                  student.email,
                   style: TextStyle(
                     fontFamily: 'SourceSansPro',
                     fontSize: 19.0,

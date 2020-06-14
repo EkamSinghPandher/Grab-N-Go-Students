@@ -1,6 +1,5 @@
 import 'package:StudentApp/components/dataSearch.dart';
 import 'package:flutter/material.dart';
-import 'package:StudentApp/constants.dart';
 import 'package:StudentApp/components/locations.dart';
 
 class ShopScreen extends StatefulWidget {

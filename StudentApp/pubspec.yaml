@@ -27,6 +27,7 @@ dependencies:
   firebase_core: ^0.4.0+9
   firebase_auth: ^0.14.0+5
   cloud_firestore: ^0.12.9+5
+  json_annotation: ^3.0.0
   
 
 
@@ -36,6 +37,8 @@ dependencies:
   animated_text_kit: ^2.1.0
   carousel_pro: ^1.0.0
   font_awesome_flutter: ^8.8.1
+  build_runner: ^1.0.0
+  json_serializable: ^3.2.0
 
 
 dev_dependencies:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:StudentApp/objects/location.dart';
+import 'package:StudentApp/components/loc.dart';
 
 class HorizontalList extends StatefulWidget {
   @override

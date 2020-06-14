@@ -1,4 +1,4 @@
-import 'package:StudentApp/subpages/stall_page.dart';
+import 'package:StudentApp/main_pages/subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
 class Location extends StatelessWidget {

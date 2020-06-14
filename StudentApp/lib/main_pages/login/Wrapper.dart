@@ -1,4 +1,4 @@
-import 'package:StudentApp/Models/Student.dart';
+import 'package:StudentApp/Models/User.dart';
 import 'package:StudentApp/main_pages/Home_Screen/page_logic.dart';
 import 'package:StudentApp/main_pages/login/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class Wrapper extends StatefulWidget {
 class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
-    final Student user = Provider.of<Student>(context);
+    final User user = Provider.of<User>(context);
     return user == null ? WelcomeScreen() : PageLogic();
   }
 }

@@ -1,27 +1,17 @@
-import 'package:StudentApp/subpages/stall_page.dart';
+import 'package:StudentApp/main_pages/subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate<String> {
   final locations = [
     "Deck",
-    "BizCafe",
-    "Reedz",
-    "Fine Foods",
-    "Science",
-    "Computing",
-    "PGP",
-    "Supper Stretch",
-    "Tea Party",
-    "Gong Cha",
-    "Subway",
-    "Engineering",
-    "Medicine",
+    "Fine Food",
+    "Science Canteen",
+    "Yusof Ishak House"
   ];
 
   final recentLocations = [
-    "Reedz",
-    "Fine Foods",
-    "Science",
+    "Deck",
+    
   ];
 
   @override
