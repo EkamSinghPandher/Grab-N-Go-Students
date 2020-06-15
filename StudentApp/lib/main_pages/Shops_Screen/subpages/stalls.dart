@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class Stalls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Vendor> vendorList = Provider.of<List<Vendor>>(context, listen: false);
+    List<Vendor> vendorList = Provider.of<List<Vendor>>(context,);
     var stallList = vendorList == null ? [] :vendorList.map((e) => {'name': e.stallName, 'picture': e.stallImage}).toList();
     return GridView.builder(
       itemCount: stallList.length,
