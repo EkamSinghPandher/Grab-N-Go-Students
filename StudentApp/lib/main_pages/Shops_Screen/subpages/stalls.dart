@@ -1,36 +1,13 @@
+import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/subpages/food_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Stalls extends StatefulWidget {
-  @override
-  _StallsState createState() => _StallsState();
-}
-
-class _StallsState extends State<Stalls> {
-  var stallList = [
-    {
-      "name": "Chicken Rice",
-      "picture": "images/chickenRice.png",
-    },
-    {
-      "name": "Muslim",
-      "picture": "images/muslim.png",
-    },
-    {
-      "name": "Noodles",
-      "picture": "images/noodle.png",
-    },
-    {
-      "name": "Xiao Long Bao",
-      "picture": "images/XLB.png",
-    },
-    {
-      "name": "Drinks",
-      "picture": "images/drink.png",
-    },
-  ];
+class Stalls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<Vendor> vendorList = Provider.of<List<Vendor>>(context, listen: false);
+    var stallList = vendorList == null ? [] :vendorList.map((e) => {'name': e.stallName, 'picture': e.stallImage}).toList();
     return GridView.builder(
       itemCount: stallList.length,
       gridDelegate:
@@ -75,7 +52,7 @@ class SingleStall extends StatelessWidget {
                   ),
                 ),
               ),
-              child: Image.asset(
+              child: Image.network(
                 picture,
                 fit: BoxFit.cover,
               ),

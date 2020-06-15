@@ -16,7 +16,7 @@ class LocationCard extends StatelessWidget {
       child: InkWell(
         onTap: () => Navigator.of(context).push(
           new MaterialPageRoute(
-            builder: (context) => new StallPage(),
+            builder: (context) => new StallPage(location: locationName,),
           ),
         ),
         child: Container(

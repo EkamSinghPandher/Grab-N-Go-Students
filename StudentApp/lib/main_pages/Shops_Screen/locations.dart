@@ -1,7 +1,7 @@
 import 'package:StudentApp/Models/LocationList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'LocationsListWidget.dart';
+import 'LocationCard.dart';
 
 class LocationsList extends StatefulWidget {
   @override

@@ -1,13 +1,10 @@
+import 'package:StudentApp/Models/LocationList.dart';
+import 'package:provider/provider.dart';
+
 import './subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate<String> {
-  final locations = [
-    "Deck",
-    "Fine Food",
-    "Science Canteen",
-    "Yusof Ishak House"
-  ];
 
   final recentLocations = [
     "Deck",
@@ -55,6 +52,7 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     // show when someone searches for something
+    final locations = Provider.of<List<Location>>(context).map((e) => e.name).toList();
     final suggestionList = query.isEmpty
         ? recentLocations
         : locations.where((element) => element.startsWith(query)).toList();

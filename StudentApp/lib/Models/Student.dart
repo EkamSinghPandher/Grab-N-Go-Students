@@ -6,6 +6,7 @@ part 'Student.g.dart';
 class Student{
   final String uid;
   final String email;
+  //geolocation
   final String currLoc;
 
   Student({this.uid, this.email, this.currLoc});

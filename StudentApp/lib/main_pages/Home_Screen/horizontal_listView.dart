@@ -1,7 +1,7 @@
 import 'package:StudentApp/Models/LocationList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Shops_Screen/LocationsListWidget.dart';
+import '../Shops_Screen/LocationCard.dart';
 
 class HorizontalList extends StatefulWidget {
   @override
