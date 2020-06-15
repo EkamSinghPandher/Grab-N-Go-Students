@@ -1,31 +1,23 @@
+import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/subpages/purchase_food_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Food extends StatefulWidget {
-  @override
-  _FoodState createState() => _FoodState();
-}
+class Food extends StatelessWidget {
+  final String name;
 
-class _FoodState extends State<Food> {
-  var foodList = [
-    {
-      "name": "Set 1",
-      "picture": "images/chicken/CRset1.png",
-      "price": "\$6.00"
-    },
-    {
-      "name": "Set 2",
-      "picture": "images/chicken/CRset2.png",
-      "price": "\$6.50"
-    },
-    {
-      "name": "Set 3",
-      "picture": "images/chicken/CRset3.png",
-      "price": "\$5.50"
-    },
-  ];
+  const Food({this.name});
+
   @override
   Widget build(BuildContext context) {
+    var foodList = Provider.of<List<Vendor>>(context)
+        .where((element) => element.stallName == name)
+        .toList()
+        .first
+        .menu
+        .map((e) =>
+            {'name': e.foodName, 'picture': e.foodImage, 'price': e.foodPrice})
+        .toList();
     return GridView.builder(
       itemCount: foodList.length,
       gridDelegate:

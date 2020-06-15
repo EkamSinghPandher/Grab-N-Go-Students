@@ -1,17 +1,11 @@
 import 'package:StudentApp/components/foods.dart';
 import 'package:flutter/material.dart';
 
-class FoodPage extends StatefulWidget {
+class FoodPage extends StatelessWidget {
   final shopName;
   final shopPicture;
 
   FoodPage({this.shopName, this.shopPicture});
-
-  @override
-  _FoodPageState createState() => _FoodPageState();
-}
-
-class _FoodPageState extends State<FoodPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +31,8 @@ class _FoodPageState extends State<FoodPage> {
               child: GridTile(
                 child: Container(
                   color: Colors.white,
-                  child: Image.asset(
-                    widget.shopPicture,
+                  child: Image.network(
+                    shopPicture,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -46,7 +40,7 @@ class _FoodPageState extends State<FoodPage> {
                   color: Colors.white70,
                   child: ListTile(
                     leading: Text(
-                      widget.shopName,
+                      shopName,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
@@ -58,7 +52,7 @@ class _FoodPageState extends State<FoodPage> {
             ),
             Container(
               height: 300,
-              child: Food(),
+              child: Food(name: shopName),
             ),
           ],
         ),
