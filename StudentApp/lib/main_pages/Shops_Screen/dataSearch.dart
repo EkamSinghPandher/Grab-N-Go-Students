@@ -5,10 +5,8 @@ import './subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate<String> {
-
   final recentLocations = [
     "Deck",
-    
   ];
 
   @override
@@ -43,7 +41,7 @@ class DataSearch extends SearchDelegate<String> {
     return InkWell(
       onTap: () => Navigator.of(context).push(
         new MaterialPageRoute(
-          builder: (context) => new StallPage(),
+          builder: (context) => new StallPage(location: query),
         ),
       ),
     );
@@ -52,15 +50,16 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     // show when someone searches for something
-    final locations = Provider.of<List<Location>>(context).map((e) => e.name).toList();
+    final locations =
+        Provider.of<List<Location>>(context).map((e) => e.name).toList();
     final suggestionList = query.isEmpty
         ? recentLocations
         : locations.where((element) => element.startsWith(query)).toList();
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
-        onTap: () {
-          showResults(context);
-        },
+        onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+          builder: (context) => new StallPage(location: suggestionList[index]),
+        )),
         leading: Icon(Icons.location_city),
         title: RichText(
           text: TextSpan(

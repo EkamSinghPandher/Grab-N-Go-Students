@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class StallPage extends StatelessWidget {
   final String location;
 
-  const StallPage({this.location});
+  const StallPage({@required this.location});
 
   @override
   Widget build(BuildContext context) {
