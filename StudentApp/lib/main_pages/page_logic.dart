@@ -1,10 +1,10 @@
 import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/User.dart';
 import 'package:StudentApp/Services/database.dart';
-import 'package:StudentApp/main_pages/Home_Screen/history_screen.dart';
+import 'package:StudentApp/main_pages/History_Current_Screen/history_screen.dart';
 import 'package:StudentApp/main_pages/Home_Screen/home_screen.dart';
-import 'package:StudentApp/main_pages/Home_Screen/profile_screen.dart';
-import 'package:StudentApp/main_pages/Home_Screen/shop_screen.dart';
+import 'package:StudentApp/main_pages/Profile_Screen/profile_screen.dart';
+import 'package:StudentApp/main_pages/Shops_Screen/shop_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

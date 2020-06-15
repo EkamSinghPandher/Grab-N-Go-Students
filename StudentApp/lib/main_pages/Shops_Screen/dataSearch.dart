@@ -1,4 +1,4 @@
-import 'package:StudentApp/main_pages/subpages/stall_page.dart';
+import './subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate<String> {

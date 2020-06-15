@@ -2,7 +2,7 @@ import 'package:StudentApp/Services/auth.dart';
 import 'package:StudentApp/components/roundedButton.dart';
 import 'package:StudentApp/main_pages/login/Wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:StudentApp/constants.dart';
+import 'package:StudentApp/components/constants.dart';
 
 
 class LoginScreen extends StatefulWidget {

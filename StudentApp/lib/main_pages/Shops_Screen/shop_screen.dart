@@ -1,6 +1,6 @@
-import 'package:StudentApp/components/dataSearch.dart';
+import 'dataSearch.dart';
 import 'package:flutter/material.dart';
-import 'package:StudentApp/components/locations.dart';
+import 'locations.dart';
 
 class ShopScreen extends StatefulWidget {
   @override
@@ -47,8 +47,8 @@ class _ShopScreenState extends State<ShopScreen> {
               child: Text('Locations'),
             ),
             Container(
-              height: 370.0,
-              child: Locations(),
+              height: MediaQuery.of(context).size.height*0.73,
+              child: LocationsList(),
             )
           ],
         ),

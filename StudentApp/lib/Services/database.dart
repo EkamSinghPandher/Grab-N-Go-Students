@@ -12,7 +12,7 @@ class DataService {
   final CollectionReference studentsCollection =
       Firestore.instance.collection('Students');
   final CollectionReference vendorsCollection =
-      Firestore.instance.collection('LocationList');
+      Firestore.instance.collection('Vendors');
   final CollectionReference locationsCollection = 
       Firestore.instance.collection('LocationList');
 
@@ -39,23 +39,39 @@ class DataService {
         .firstWhere((element) => element.uid == this.uid);
   }
 
+  //Get a list of locations
   Stream<List<Location>> get locations{
     return locationsCollection.snapshots().map(locationsFromSnapshot);
   }
 
+  //get a List of locations from a snapshot
   List<Location> locationsFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc) {
       return Location.fromJson(doc.data);
     }).toList();
   }
 
+  //Get a list of vendors at the particular location
   Stream<List<Vendor>> vendorsFromLocation(String locName){
     return locationsCollection.document(locName).collection("Stalls").snapshots().map(vendorsFromSnapshot);
   }
 
+  //Get a list of vendors from a snapshot
   List<Vendor> vendorsFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
       return Vendor.fromJson(doc.data);
-    });
+    }).toList();
   }
+
+  //Get a list of all vendors
+  Stream<List<Vendor>> get vendors{
+    return vendorsCollection.snapshots().map(vendorListFromSnapshot);
+  }
+  //Get a list of all vendors from a snapshot
+  List<Vendor> vendorListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return Vendor.fromJson(doc.data);
+    }).toList();
+  }
+
 }

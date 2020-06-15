@@ -1,8 +1,9 @@
 import 'package:StudentApp/Models/User.dart';
-import 'package:StudentApp/main_pages/Home_Screen/page_logic.dart';
 import 'package:StudentApp/main_pages/login/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../page_logic.dart';
 
 class Wrapper extends StatefulWidget {
   static const id = 'Wrapper_screen';

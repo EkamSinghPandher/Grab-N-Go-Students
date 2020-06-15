@@ -1,4 +1,4 @@
-import 'package:StudentApp/components/chatTile.dart';
+import 'chatTile.dart';
 import 'package:flutter/material.dart';
 
 class CurrentScreen extends StatefulWidget {

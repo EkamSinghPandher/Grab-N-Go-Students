@@ -1,4 +1,4 @@
-import 'package:StudentApp/main_pages/subpages/food_page.dart';
+import 'package:StudentApp/main_pages/Shops_Screen/subpages/food_page.dart';
 import 'package:flutter/material.dart';
 
 class Stalls extends StatefulWidget {

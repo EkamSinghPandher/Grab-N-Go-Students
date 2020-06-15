@@ -1,5 +1,5 @@
-import 'package:StudentApp/components/historyTile.dart';
-import 'package:StudentApp/main_pages/Home_Screen/current_screen.dart';
+import 'historyTile.dart';
+import 'current_screen.dart';
 import 'package:flutter/material.dart';
 
 class HistoryScreen extends StatefulWidget {

@@ -1,13 +1,13 @@
-import 'package:StudentApp/main_pages/subpages/stall_page.dart';
+import './subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
-class Location extends StatelessWidget {
-  final String imageLocation;
-  final String locationName;
+class LocationCard extends StatelessWidget {
   final double width;
   final double height;
+  final String imageLocation;
+  final String locationName;
 
-  Location({this.imageLocation, this.locationName, this.width, this.height});
+  LocationCard({this.imageLocation, this.locationName, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +22,11 @@ class Location extends StatelessWidget {
         child: Container(
           width: width,
           child: ListTile(
-            title: Image.asset(
+            title: Image.network(
               imageLocation,
               width: width,
               height: height,
+              fit: BoxFit.fill,
             ),
             subtitle: Container(
               child: Text(locationName),
