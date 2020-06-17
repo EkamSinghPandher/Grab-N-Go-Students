@@ -3,7 +3,7 @@ import 'package:StudentApp/components/roundedButton.dart';
 import 'package:StudentApp/main_pages/login/Wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:StudentApp/components/constants.dart';
-
+import 'package:geolocator/geolocator.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -14,10 +14,16 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = AuthService();
   final formKey = GlobalKey<FormState>();
-  
+
   String email = '';
   String password = '';
   String errorMsg = '';
+
+  void getLocation() async {
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +87,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       dynamic result = await _auth.signInUser(email, password);
                       if (result == null) {
                         setState(() {
-                          errorMsg =
-                              'Please enter a valid email or password';
+                          errorMsg = 'Please enter a valid email or password';
                         });
-                      }else{
+                      } else {
                         Navigator.of(context).pushReplacementNamed(Wrapper.id);
+                        getLocation();
                       }
                     }
                   },
