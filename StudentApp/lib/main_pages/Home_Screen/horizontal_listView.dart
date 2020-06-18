@@ -17,12 +17,6 @@ class _HorizontalListState extends State<HorizontalList> {
   List<Location> geoSort(List<Location> list) {
     getLocation();
     List<Location> ans = new List();
-    /*
-    for (Location place in list) {
-      print(
-        distanceTo(place, current),
-      );
-    }*/
     list.sort(
       (a, b) => distanceTo(a, current).compareTo(distanceTo(b, current)),
     );
