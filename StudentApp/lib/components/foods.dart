@@ -2,19 +2,16 @@ import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/subpages/purchase_food_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:StudentApp/Models/Food.dart' as fd;
 
 class Food extends StatelessWidget {
-  final String name;
+  final List<fd.Food> foodList;
 
-  const Food({this.name});
+  const Food({this.foodList});
 
   @override
   Widget build(BuildContext context) {
-    var foodList = Provider.of<List<Vendor>>(context)
-        .where((element) => element.stallName == name)
-        .toList()
-        .first
-        .menu
+    var foodMap = foodList
         .map((e) =>
             {'name': e.foodName, 'picture': e.foodImage, 'price': e.foodPrice})
         .toList();
@@ -24,9 +21,9 @@ class Food extends StatelessWidget {
           new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (BuildContext context, int index) {
         return SingleFood(
-          name: foodList[index]['name'],
-          picture: foodList[index]['picture'],
-          price: foodList[index]['price'],
+          name: foodMap[index]['name'],
+          picture: foodMap[index]['picture'],
+          price: foodMap[index]['price'],
         );
       },
     );
@@ -67,7 +64,7 @@ class SingleFood extends StatelessWidget {
                     name,
                   ),
                   title: Text(
-                    price,
+                    (price/100).toString(),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),

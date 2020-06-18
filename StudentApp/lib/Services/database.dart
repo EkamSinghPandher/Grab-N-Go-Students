@@ -1,3 +1,4 @@
+import 'package:StudentApp/Models/Food.dart';
 import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/Models/LocationList.dart';
@@ -71,6 +72,18 @@ class DataService {
   List<Vendor> vendorListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
       return Vendor.fromJson(doc.data);
+    }).toList();
+  }
+
+  //Get a list of vendors at the particular location
+  Stream<List<Food>> menuFromLocation(Vendor vendor, String locName){
+    return locationsCollection.document(locName).collection("Stalls").document(vendor.uid).collection('Menu').snapshots().map(menuFromSnapshot);
+  }
+
+  //Get a list of food from a vendor
+  List<Food> menuFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return Food.fromJson(doc.data);
     }).toList();
   }
 
