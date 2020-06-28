@@ -2,15 +2,16 @@ import 'package:StudentApp/Models/Food.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/components/foods.dart' as fc;
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class FoodPage extends StatelessWidget {
   final Vendor shop;
   final List<Food> menu;
 
+  final String studentID;
+
   FoodPage({
     this.shop,
-    this.menu
+    this.menu, @required this.studentID
   });
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class FoodPage extends StatelessWidget {
             ),
             Container(
               height: 300,
-              child: fc.Food(foodList:menu),
+              child: fc.Food(vendor: shop, foodList:menu, studentID: studentID,),
             ),
           ],
         ),

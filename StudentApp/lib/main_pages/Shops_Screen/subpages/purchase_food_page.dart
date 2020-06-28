@@ -1,7 +1,17 @@
+import 'package:StudentApp/Models/Food.dart';
+import 'package:StudentApp/Models/Student.dart';
+import 'package:StudentApp/Models/User.dart';
+import 'package:StudentApp/Models/Vendor.dart';
+import 'package:StudentApp/Services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PurchaseFood extends StatefulWidget {
+  final Food food;
+  final Vendor vendor;
+  final String studentID;
+
+  const PurchaseFood({Key key, @ required this.food, @required this.vendor, @required this.studentID}) : super(key: key);
   @override
   _PurchaseFoodState createState() => _PurchaseFoodState();
 }
@@ -26,7 +36,7 @@ class _PurchaseFoodState extends State<PurchaseFood> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text(
-              'Buy food',
+              'Confirm Your Order',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 30.0,
@@ -43,11 +53,11 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                         cardChild: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RoundIconButton(
-                              iconDisplay: FontAwesomeIcons.minus,
+                            IconButton(
+                              icon: Icon(FontAwesomeIcons.minus, color: Colors.white,),
                               onPressed: () {
                                 setState(() {
-                                  quantity--;
+                                  quantity > 1 ? quantity-- : quantity;
                                 });
                               },
                             ),
@@ -70,11 +80,11 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                             SizedBox(
                               width: 10.0,
                             ),
-                            RoundIconButton(
-                              iconDisplay: FontAwesomeIcons.plus,
+                            IconButton(
+                              icon: Icon(FontAwesomeIcons.plus, color: Colors.white,),
                               onPressed: () {
                                 setState(() {
-                                  quantity++;
+                                  quantity>= widget.food.stock ? quantity : quantity++;
                                 });
                               },
                             ),
@@ -86,13 +96,14 @@ class _PurchaseFoodState extends State<PurchaseFood> {
             ),
             FlatButton(
               child: Text(
-                'Add',
+                'Confirm',
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
+                DataService(uid: widget.studentID).orderFood(widget.food, quantity, DateTime.now(), widget.vendor);
                 Navigator.pop(context);
               },
             ),

@@ -7,7 +7,9 @@ class LocationCard extends StatelessWidget {
   final String imageLocation;
   final String locationName;
 
-  LocationCard({this.imageLocation, this.locationName, this.width, this.height});
+  final String studentID;
+
+  LocationCard({this.imageLocation, this.locationName, this.width, this.height, @required this.studentID});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class LocationCard extends StatelessWidget {
       child: InkWell(
         onTap: () => Navigator.of(context).push(
           new MaterialPageRoute(
-            builder: (context) => new StallPage(location: locationName,),
+            builder: (context) => new StallPage(location: locationName, studentID: studentID,),
           ),
         ),
         child: Container(

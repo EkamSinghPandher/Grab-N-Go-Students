@@ -1,3 +1,6 @@
+import 'package:StudentApp/Models/Student.dart';
+import 'package:provider/provider.dart';
+
 import 'dataSearch.dart';
 import 'package:flutter/material.dart';
 import 'locations.dart';
@@ -11,14 +14,16 @@ class _ShopScreenState extends State<ShopScreen> {
   String foodOrLocation;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    Student stud = Provider.of<Student>(context);
+    return stud == null? CircularProgressIndicator():
+    Scaffold(
       appBar: AppBar(
         leading: null,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
+                showSearch(context: context, delegate: DataSearch(stud.uid));
               }),
         ],
         title: Text('Shop'),
@@ -48,7 +53,7 @@ class _ShopScreenState extends State<ShopScreen> {
             ),
             Container(
               height: MediaQuery.of(context).size.height*0.73,
-              child: LocationsList(),
+              child: LocationsList(studentID:stud.uid),
             )
           ],
         ),

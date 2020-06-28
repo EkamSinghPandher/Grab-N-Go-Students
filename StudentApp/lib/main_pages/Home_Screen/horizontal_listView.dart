@@ -4,11 +4,15 @@ import 'package:provider/provider.dart';
 import '../Shops_Screen/LocationCard.dart';
 
 class HorizontalList extends StatefulWidget {
+  final String studentID;
+
+  const HorizontalList({Key key, this.studentID}) : super(key: key);
   @override
   _HorizontalListState createState() => _HorizontalListState();
 }
 
 class _HorizontalListState extends State<HorizontalList> {
+
   @override
   Widget build(BuildContext context) {
     List<Location> locations = Provider.of<List<Location>>(context);
@@ -22,6 +26,7 @@ class _HorizontalListState extends State<HorizontalList> {
                 //wait for geotagging to link to locations
                 children: locations
                     .map((e) => LocationCard(
+                      studentID: widget.studentID,
                           imageLocation: e.imageURL,
                           locationName: e.name,
                           width: 160,

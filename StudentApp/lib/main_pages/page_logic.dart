@@ -1,3 +1,4 @@
+import 'package:StudentApp/Models/Order.dart';
 import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/User.dart';
 import 'package:StudentApp/Services/database.dart';
@@ -28,34 +29,37 @@ class _PageLogicState extends State<PageLogic> {
     User user = Provider.of<User>(context);
     return StreamProvider<Student>(
       create: (_) => DataService(uid: user.uid).students,
-      child: Scaffold(
-        body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_basket),
-              title: Text('Shops'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.speaker_notes),
-              title: Text('History'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Profile'),
-            ),
-          ],
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+      child: StreamProvider<List<Order>>(
+        create: (_) => DataService(uid: user.uid).myOrders,
+              child: Scaffold(
+          body: _children[_currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text('Home'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_basket),
+                title: Text('Shops'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.speaker_notes),
+                title: Text('History'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                title: Text('Profile'),
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          ),
         ),
       ),
     );

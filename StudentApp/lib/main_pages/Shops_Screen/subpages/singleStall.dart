@@ -8,7 +8,9 @@ import 'package:provider/provider.dart';
 class SingleStall extends StatelessWidget {
   final Vendor shop;
 
-  SingleStall({this.shop});
+  final String studentID;
+
+  SingleStall({this.shop, @required this.studentID});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class SingleStall extends StatelessWidget {
               builder: (context, provider, child) => InkWell(
                 onTap: () => Navigator.of(context).push(
                   new MaterialPageRoute(
-                    builder: (_) => new FoodPage(shop: shop, menu: provider),
+                    builder: (_) => new FoodPage(shop: shop, menu: provider, studentID: studentID,),
                   ),
                 ),
                 child: GridTile(
