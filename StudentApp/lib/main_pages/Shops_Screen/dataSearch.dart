@@ -1,13 +1,17 @@
 import 'package:StudentApp/Models/LocationList.dart';
+import 'package:StudentApp/Models/Student.dart';
+import 'package:StudentApp/Models/Vendor.dart';
+import 'package:StudentApp/main_pages/Shops_Screen/subpages/singleStall.dart';
 import 'package:provider/provider.dart';
 
 import './subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate<String> {
-  final recentLocations = [
-    "Deck",
-  ];
+  final String studentID;
+  final recentLocations = [];
+
+  DataSearch(this.studentID);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -41,7 +45,7 @@ class DataSearch extends SearchDelegate<String> {
     return InkWell(
       onTap: () => Navigator.of(context).push(
         new MaterialPageRoute(
-          builder: (context) => new StallPage(location: query),
+          builder: (context) => new StallPage(location: query, studentID: studentID,),
         ),
       ),
     );
@@ -49,16 +53,26 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    Student stud = Provider.of<Student>(context);
     // show when someone searches for something
+    final vendorList = Provider.of<List<Vendor>>(context);
+    final location =
+        Provider.of<List<Location>>(context).map((e) => e.name).toList();
     final locations =
         Provider.of<List<Location>>(context).map((e) => e.name).toList();
+    locations.addAll(vendorList.map((e) => e.stallName));
     final suggestionList = query.isEmpty
         ? recentLocations
         : locations.where((element) => element.startsWith(query)).toList();
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
         onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-          builder: (context) => new StallPage(location: suggestionList[index]),
+          builder: (context) => location.contains(suggestionList[index])
+              ? StallPage(location: suggestionList[index], studentID: studentID,)
+              : SingleStall(
+                studentID: studentID,
+                  shop: vendorList.firstWhere(
+                      (element) => element.stallName == suggestionList[index])),
         )),
         leading: Icon(Icons.location_city),
         title: RichText(

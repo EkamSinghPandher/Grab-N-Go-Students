@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:StudentApp/Models/Food.dart';
+import 'package:StudentApp/Models/Order.dart';
 import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/Models/LocationList.dart';
@@ -13,9 +17,8 @@ class DataService {
       Firestore.instance.collection('Students');
   final CollectionReference vendorsCollection =
       Firestore.instance.collection('Vendors');
-  final CollectionReference locationsCollection = 
+  final CollectionReference locationsCollection =
       Firestore.instance.collection('LocationList');
-
 
   //uodating user data
   Future updateStudentData(Student student) async {
@@ -40,38 +43,141 @@ class DataService {
   }
 
   //Get a list of locations
-  Stream<List<Location>> get locations{
+  Stream<List<Location>> get locations {
     return locationsCollection.snapshots().map(locationsFromSnapshot);
   }
 
   //get a List of locations from a snapshot
-  List<Location> locationsFromSnapshot(QuerySnapshot snapshot){
+  List<Location> locationsFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Location.fromJson(doc.data);
     }).toList();
   }
 
   //Get a list of vendors at the particular location
-  Stream<List<Vendor>> vendorsFromLocation(String locName){
-    return locationsCollection.document(locName).collection("Stalls").snapshots().map(vendorsFromSnapshot);
+  Stream<List<Vendor>> vendorsFromLocation(String locName) {
+    return locationsCollection
+        .document(locName)
+        .collection("Stalls")
+        .snapshots()
+        .map(vendorsFromSnapshot);
   }
 
   //Get a list of vendors from a snapshot
-  List<Vendor> vendorsFromSnapshot(QuerySnapshot snapshot){
-    return snapshot.documents.map((doc){
+  List<Vendor> vendorsFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
       return Vendor.fromJson(doc.data);
     }).toList();
   }
 
   //Get a list of all vendors
-  Stream<List<Vendor>> get vendors{
+  Stream<List<Vendor>> get vendors {
     return vendorsCollection.snapshots().map(vendorListFromSnapshot);
   }
+
   //Get a list of all vendors from a snapshot
-  List<Vendor> vendorListFromSnapshot(QuerySnapshot snapshot){
-    return snapshot.documents.map((doc){
+  List<Vendor> vendorListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
       return Vendor.fromJson(doc.data);
     }).toList();
   }
 
+  //Get a list of vendors at the particular location
+  Stream<List<Food>> menuFromLocation(Vendor vendor, String locName) {
+    return locationsCollection
+        .document(locName)
+        .collection("Stalls")
+        .document(vendor.uid)
+        .collection('Menu')
+        .snapshots()
+        .map(menuFromSnapshot);
+  }
+
+  //Get a list of food from a vendor
+  List<Food> menuFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Food.fromJson(doc.data);
+    }).toList();
+  }
+
+  //gets a stream of the students orders
+  Stream<List<Order>> get myOrders {
+    return studentsCollection
+        .document(uid)
+        .collection('Orders')
+        .snapshots()
+        .map(ordersFromSnapshot);
+  }
+
+  //gets a list of orders from a snapshot
+  List<Order> ordersFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((e) => Order.fromJson(e.data)).toList();
+  }
+
+  //Order is collected
+  Future collectedOrder(Order order) async {
+    vendorsCollection
+        .document(order.vendorUID)
+        .collection('Orders')
+        .document(order.orderID)
+        .delete();
+    return await studentsCollection
+        .document(order.studentUID)
+        .collection('Orders')
+        .document(order.orderID)
+        .setData(order.toJson());
+  }
+
+  Future orderFood(
+    Food food,
+    int quantity,
+    DateTime dateTime,
+    Vendor vendor,
+  ) async {
+    String orderID = Random(DateTime.now().hashCode).nextInt(999999).toString();
+    Order newOrder = Order(
+        dateTime: dateTime,
+        vendorUID: vendor.uid,
+        studentUID: uid,
+        foodName: food.foodName,
+        foodPrice: food.foodPrice,
+        quantity: quantity,
+        isCollected: false,
+        isDone: false,
+        orderID: orderID);
+    await vendorsCollection
+        .document(vendor.uid)
+        .collection('Menu')
+        .document(food.uid)
+        .setData(Food(
+                foodImage: food.foodImage,
+                foodName: food.foodName,
+                foodPrice: food.foodPrice,
+                stock: (food.stock - quantity),
+                uid: food.uid)
+            .toJson());
+    await locationsCollection
+        .document(vendor.loc)
+        .collection('Stalls')
+        .document(vendor.uid)
+        .collection('Menu')
+        .document(food.uid)
+        .setData(Food(
+                foodImage: food.foodImage,
+                foodName: food.foodName,
+                foodPrice: food.foodPrice,
+                stock: (food.stock - quantity),
+                uid: food.uid)
+            .toJson());
+    await vendorsCollection
+        .document(vendor.uid)
+        .collection('Orders')
+        .document(orderID)
+        .setData(newOrder.toJson());
+    await studentsCollection
+        .document(uid)
+        .collection('Orders')
+        .document(orderID)
+        .setData(newOrder.toJson());
+  }
 }

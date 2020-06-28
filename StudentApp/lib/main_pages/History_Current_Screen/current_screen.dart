@@ -1,9 +1,13 @@
 import 'package:StudentApp/main_pages/appBar.dart';
+import 'package:StudentApp/Models/Order.dart';
 
 import 'chatTile.dart';
 import 'package:flutter/material.dart';
 
 class CurrentScreen extends StatefulWidget {
+  final List<Order> orderList;
+
+  const CurrentScreen({Key key, this.orderList}) : super(key: key);
   @override
   _CurrentScreenState createState() => _CurrentScreenState();
 }
@@ -58,14 +62,19 @@ class _CurrentScreenState extends State<CurrentScreen> {
                     hintText: "Search Username"),
               ),
             ),
-            ChatTile(
-              userName: "David",
-              userEmail: "david@email.com",
-            ),
-            ChatTile(
-              userName: "Ekam",
-              userEmail: "ekam@email.com",
-            )
+            Container(
+                child: SingleChildScrollView(
+              child: Column(
+                  children: widget.orderList == null
+                      ? null
+                      : widget.orderList
+                          .where((element) => element.isCollected == false)
+                          .toList()
+                          .map((e) => ChatTile(
+                                order: e,
+                              ))
+                          .toList()),
+            ))
           ],
         ),
       ),

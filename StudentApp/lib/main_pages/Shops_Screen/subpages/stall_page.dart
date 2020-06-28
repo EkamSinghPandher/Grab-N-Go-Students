@@ -1,3 +1,4 @@
+import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/Services/database.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +9,9 @@ import 'package:flutter/material.dart';
 class StallPage extends StatelessWidget {
   final String location;
 
-  const StallPage({@required this.location});
+  final String studentID;
+
+  const StallPage({@required this.location, @required this.studentID});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,7 @@ class StallPage extends StatelessWidget {
               ),
               Container(
                 height: 550,
-                child: Stalls(),
+                child: Stalls(studentID: studentID),
               )
             ],
           ),

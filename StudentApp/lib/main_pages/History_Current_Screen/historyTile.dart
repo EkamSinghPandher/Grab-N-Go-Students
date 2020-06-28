@@ -1,13 +1,17 @@
+import 'package:StudentApp/Models/Order.dart';
+import 'package:StudentApp/Models/Vendor.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class HistoryTile extends StatelessWidget {
-  final String userName;
-  final String userEmail;
+  final Order order;
 
-  HistoryTile({this.userName, this.userEmail});
+  HistoryTile({this.order});
 
   @override
   Widget build(BuildContext context) {
+    List<Vendor> vendors = Provider.of<List<Vendor>>(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: Row(
@@ -15,8 +19,8 @@ class HistoryTile extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(userName),
-              Text(userEmail),
+              Text(vendors.firstWhere((element) => element.uid == order.vendorUID).stallName),
+              Text(DateFormat("dd-MM-yyyy HH:mm").format(order.dateTime)),
             ],
           ),
           Spacer(),

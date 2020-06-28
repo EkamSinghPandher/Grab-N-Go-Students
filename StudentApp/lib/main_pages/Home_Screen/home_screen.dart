@@ -1,4 +1,6 @@
 import 'package:StudentApp/main_pages/appBar.dart';
+import 'package:StudentApp/Models/Student.dart';
+import 'package:provider/provider.dart';
 
 import 'carousell.dart';
 import 'horizontal_listView.dart';
@@ -20,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int current = 0;
   Widget build(BuildContext context) {
+    Student stud = Provider.of<Student>(context);
     return Scaffold(
       appBar: topBar(context, null),
       body: SafeArea(
@@ -31,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.all(8.0),
               child: Text('Places near you'),
             ),
-            HorizontalList(),
+            HorizontalList(studentID: stud.uid,),
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text('Promotion'),

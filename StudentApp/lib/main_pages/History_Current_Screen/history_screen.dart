@@ -1,4 +1,7 @@
 import '../appBar.dart';
+import 'package:StudentApp/Models/Order.dart';
+import 'package:provider/provider.dart';
+
 import 'historyTile.dart';
 import 'current_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +14,7 @@ class HistoryScreen extends StatefulWidget {
 class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
+    List<Order> orders = Provider.of<List<Order>>(context);
     return Scaffold(
       appBar: topBar(context, null),
       body: SafeArea(
@@ -32,7 +36,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     onTap: () {
                       Navigator.of(context).push(
                         new MaterialPageRoute(
-                          builder: (context) => new CurrentScreen(),
+                          builder: (context) =>
+                              new CurrentScreen(orderList: orders),
                         ),
                       );
                     },
@@ -49,14 +54,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
             SizedBox(
               height: 15.0,
             ),
-            HistoryTile(
-              userName: "George",
-              userEmail: "george@email.com",
-            ),
-            HistoryTile(
-              userName: "Jason",
-              userEmail: "jazzon@email.com",
-            ),
+            Container(
+                child: SingleChildScrollView(
+                    child: Column(
+                        children: orders == null? [] : orders
+                            .where((element) => element.isCollected == true)
+                            .toList()
+                            .map((e) => HistoryTile(
+                                  order: e,
+                                ))
+                            .toList()))),
           ],
         ),
       ),

@@ -1,11 +1,18 @@
-import 'package:StudentApp/components/foods.dart';
+import 'package:StudentApp/Models/Food.dart';
+import 'package:StudentApp/Models/Vendor.dart';
+import 'package:StudentApp/components/foods.dart' as fc;
 import 'package:flutter/material.dart';
 
 class FoodPage extends StatelessWidget {
-  final shopName;
-  final shopPicture;
+  final Vendor shop;
+  final List<Food> menu;
 
-  FoodPage({this.shopName, this.shopPicture});
+  final String studentID;
+
+  FoodPage({
+    this.shop,
+    this.menu, @required this.studentID
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +39,7 @@ class FoodPage extends StatelessWidget {
                 child: Container(
                   color: Colors.white,
                   child: Image.network(
-                    shopPicture,
+                    shop.stallImage,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -40,7 +47,7 @@ class FoodPage extends StatelessWidget {
                   color: Colors.white70,
                   child: ListTile(
                     leading: Text(
-                      shopName,
+                      shop.stallName,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
@@ -52,7 +59,7 @@ class FoodPage extends StatelessWidget {
             ),
             Container(
               height: 300,
-              child: Food(name: shopName),
+              child: fc.Food(vendor: shop, foodList:menu, studentID: studentID,),
             ),
           ],
         ),
