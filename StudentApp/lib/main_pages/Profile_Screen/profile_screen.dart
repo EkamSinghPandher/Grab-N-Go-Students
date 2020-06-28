@@ -1,5 +1,6 @@
 import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Services/auth.dart';
+import 'package:StudentApp/main_pages/appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,18 +14,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     Student student = Provider.of<Student>(context);
     return Scaffold(
-      appBar: AppBar(
-        leading: null,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                //Implement logout functionality
-              }),
-        ],
-        title: Text('Profile'),
-        backgroundColor: Colors.lightBlueAccent,
-      ),
+      appBar: topBar(context, null),
       body: student == null
           ? CircularProgressIndicator()
           : SafeArea(

@@ -1,3 +1,5 @@
+import 'package:StudentApp/main_pages/appBar.dart';
+
 import 'chatTile.dart';
 import 'package:flutter/material.dart';
 
@@ -12,18 +14,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: null,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                //Implement logout functionality
-              }),
-        ],
-        title: Text('History'),
-        backgroundColor: Colors.lightBlueAccent,
-      ),
+      appBar: topBar(context, null),
       body: SafeArea(
         child: Column(
           children: [
@@ -54,35 +45,17 @@ class _CurrentScreenState extends State<CurrentScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: searchText,
-                      decoration: InputDecoration(
-                        hintText: "search username",
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 40.0,
-                    width: 40.0,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            const Color(0x36FFFFFF),
-                            const Color(0x0FFFFFF),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(40)),
-                    padding: const EdgeInsets.all(10.0),
-                    child: Icon(
-                      Icons.search,
-                      size: 35.0,
-                    ),
-                  ),
-                ],
+              margin: EdgeInsets.all(20),
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    icon: Icon(Icons.search),
+                    hintText: "Search Username"),
               ),
             ),
             ChatTile(

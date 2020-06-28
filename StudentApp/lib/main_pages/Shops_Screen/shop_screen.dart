@@ -1,3 +1,5 @@
+import 'package:StudentApp/main_pages/appBar.dart';
+
 import 'dataSearch.dart';
 import 'package:flutter/material.dart';
 import 'locations.dart';
@@ -12,18 +14,17 @@ class _ShopScreenState extends State<ShopScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: null,
-        actions: <Widget>[
+      appBar: topBar(
+          context,
           IconButton(
-              icon: Icon(Icons.search),
+              icon: Icon(
+                Icons.search,
+                color: Colors.black,
+                size: 25,
+              ),
               onPressed: () {
                 showSearch(context: context, delegate: DataSearch());
-              }),
-        ],
-        title: Text('Shop'),
-        backgroundColor: Colors.lightBlueAccent,
-      ),
+              })),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +48,7 @@ class _ShopScreenState extends State<ShopScreen> {
               child: Text('Locations'),
             ),
             Container(
-              height: MediaQuery.of(context).size.height*0.73,
+              height: MediaQuery.of(context).size.height * 0.73,
               child: LocationsList(),
             )
           ],

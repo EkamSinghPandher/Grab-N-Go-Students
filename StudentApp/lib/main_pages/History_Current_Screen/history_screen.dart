@@ -1,3 +1,4 @@
+import '../appBar.dart';
 import 'historyTile.dart';
 import 'current_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,18 +12,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: null,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                //Implement logout functionality
-              }),
-        ],
-        title: Text('History'),
-        backgroundColor: Colors.lightBlueAccent,
-      ),
+      appBar: topBar(context, null),
       body: SafeArea(
         child: Column(
           children: [

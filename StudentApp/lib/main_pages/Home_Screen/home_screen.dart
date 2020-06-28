@@ -1,3 +1,5 @@
+import 'package:StudentApp/main_pages/appBar.dart';
+
 import 'carousell.dart';
 import 'horizontal_listView.dart';
 import 'package:flutter/material.dart';
@@ -19,19 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int current = 0;
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        leading: null,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                //Implement logout functionality
-              }),
-        ],
-        title: Text('Home'),
-        backgroundColor: Colors.lightBlueAccent,
-      ),
+      appBar: topBar(context, null),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

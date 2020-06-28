@@ -7,30 +7,49 @@ class LocationCard extends StatelessWidget {
   final String imageLocation;
   final String locationName;
 
-  LocationCard({this.imageLocation, this.locationName, this.width, this.height});
+  LocationCard(
+      {this.imageLocation, this.locationName, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(5.0),
+      padding: EdgeInsets.all(2.0),
       child: InkWell(
         onTap: () => Navigator.of(context).push(
           new MaterialPageRoute(
-            builder: (context) => new StallPage(location: locationName,),
+            builder: (context) => new StallPage(
+              location: locationName,
+            ),
           ),
         ),
         child: Container(
+          padding: EdgeInsets.all(20),
           width: width,
-          child: ListTile(
-            title: Image.network(
-              imageLocation,
-              width: width,
-              height: height,
-              fit: BoxFit.fill,
-            ),
-            subtitle: Container(
-              child: Text(locationName),
-              alignment: Alignment.topCenter,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(0, 4),
+                blurRadius: 20,
+                color: Color(0xFFB0CCE1).withOpacity(0.32),
+              ),
+            ],
+          ),
+          child: Container(
+            margin: EdgeInsets.only(bottom: 25),
+            child: ListTile(
+              title: Image.network(
+                imageLocation,
+                width: width,
+                height: height,
+                fit: BoxFit.fill,
+              ),
+              subtitle: Container(
+                padding: EdgeInsets.only(top: 8),
+                child: Text(locationName),
+                alignment: Alignment.topCenter,
+              ),
             ),
           ),
         ),

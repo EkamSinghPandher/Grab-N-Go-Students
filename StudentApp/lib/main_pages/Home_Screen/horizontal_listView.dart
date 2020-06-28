@@ -42,7 +42,7 @@ class _HorizontalListState extends State<HorizontalList> {
         ? CircularProgressIndicator()
         : Container(
             alignment: Alignment.center,
-            height: 110.0,
+            height: 140.0,
             child: ListView(
               scrollDirection: Axis.horizontal,
               //wait for geotagging to link to locations
