@@ -16,16 +16,16 @@ class HorizontalList extends StatefulWidget {
 
 class _HorizontalListState extends State<HorizontalList> {
   @override
-   void setState(fn) {
-    if(mounted){
+  void setState(fn) {
+    if (mounted) {
       super.setState(fn);
     }
   }
-  
+
   Position current;
+  bool isLoading = true;
 
   List<Location> geoSort(List<Location> list) {
-    getLocation();
     List<Location> ans = new List();
     list.sort(
       (a, b) => distanceTo(a, current).compareTo(distanceTo(b, current)),
@@ -38,6 +38,7 @@ class _HorizontalListState extends State<HorizontalList> {
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     setState(() {
       current = position;
+      isLoading = false;
     });
   }
 
@@ -50,7 +51,8 @@ class _HorizontalListState extends State<HorizontalList> {
   @override
   Widget build(BuildContext context) {
     List<Location> locations = Provider.of<List<Location>>(context);
-    return locations == null
+    getLocation();
+    return (locations == null || isLoading)
         ? CircularProgressIndicator()
         : Container(
             alignment: Alignment.center,
