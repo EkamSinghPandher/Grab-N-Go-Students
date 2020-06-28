@@ -1,4 +1,3 @@
-import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/Services/database.dart';
 import 'package:provider/provider.dart';

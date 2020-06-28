@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'carousell.dart';
 import 'horizontal_listView.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
@@ -14,11 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void getLocation() async {
-    Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    print(position);
-  }
 
   int current = 0;
   Widget build(BuildContext context) {
@@ -39,12 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.all(8.0),
               child: Text('Promotion'),
             ),
-            RaisedButton(
-              onPressed: () {
-                getLocation();
-              },
-              child: Text("Get Location"),
-            )
           ],
         ),
       ),

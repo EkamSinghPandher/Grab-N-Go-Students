@@ -15,6 +15,13 @@ class HorizontalList extends StatefulWidget {
 }
 
 class _HorizontalListState extends State<HorizontalList> {
+  @override
+   void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+  
   Position current;
 
   List<Location> geoSort(List<Location> list) {
@@ -29,7 +36,9 @@ class _HorizontalListState extends State<HorizontalList> {
   void getLocation() async {
     Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    current = position;
+    setState(() {
+      current = position;
+    });
   }
 
   double distanceTo(Location geo, Position current) {

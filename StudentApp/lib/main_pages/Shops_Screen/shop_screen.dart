@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import 'package:StudentApp/main_pages/appBar.dart';
-=======
 import 'package:StudentApp/Models/Student.dart';
 import 'package:provider/provider.dart';
->>>>>>> OrderSystems
 
 import 'dataSearch.dart';
 import 'package:flutter/material.dart';
@@ -18,18 +14,12 @@ class _ShopScreenState extends State<ShopScreen> {
   String foodOrLocation;
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Scaffold(
-      appBar: topBar(
-          context,
-=======
     Student stud = Provider.of<Student>(context);
     return stud == null? CircularProgressIndicator():
     Scaffold(
       appBar: AppBar(
         leading: null,
         actions: <Widget>[
->>>>>>> OrderSystems
           IconButton(
               icon: Icon(
                 Icons.search,
@@ -37,17 +27,12 @@ class _ShopScreenState extends State<ShopScreen> {
                 size: 25,
               ),
               onPressed: () {
-<<<<<<< HEAD
-                showSearch(context: context, delegate: DataSearch());
-              })),
-=======
                 showSearch(context: context, delegate: DataSearch(stud.uid));
               }),
         ],
         title: Text('Shop'),
         backgroundColor: Colors.lightBlueAccent,
       ),
->>>>>>> OrderSystems
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,13 +56,8 @@ class _ShopScreenState extends State<ShopScreen> {
               child: Text('Locations'),
             ),
             Container(
-<<<<<<< HEAD
-              height: MediaQuery.of(context).size.height * 0.73,
-              child: LocationsList(),
-=======
               height: MediaQuery.of(context).size.height*0.73,
               child: LocationsList(studentID:stud.uid),
->>>>>>> OrderSystems
             )
           ],
         ),
