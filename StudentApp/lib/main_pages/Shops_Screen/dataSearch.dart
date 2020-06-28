@@ -45,7 +45,10 @@ class DataSearch extends SearchDelegate<String> {
     return InkWell(
       onTap: () => Navigator.of(context).push(
         new MaterialPageRoute(
-          builder: (context) => new StallPage(location: query, studentID: studentID,),
+          builder: (context) => new StallPage(
+            location: query,
+            studentID: studentID,
+          ),
         ),
       ),
     );
@@ -53,7 +56,6 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    Student stud = Provider.of<Student>(context);
     // show when someone searches for something
     final vendorList = Provider.of<List<Vendor>>(context);
     final location =
@@ -68,9 +70,12 @@ class DataSearch extends SearchDelegate<String> {
       itemBuilder: (context, index) => ListTile(
         onTap: () => Navigator.of(context).push(new MaterialPageRoute(
           builder: (context) => location.contains(suggestionList[index])
-              ? StallPage(location: suggestionList[index], studentID: studentID,)
+              ? StallPage(
+                  location: suggestionList[index],
+                  studentID: studentID,
+                )
               : SingleStall(
-                studentID: studentID,
+                  studentID: studentID,
                   shop: vendorList.firstWhere(
                       (element) => element.stallName == suggestionList[index])),
         )),
