@@ -11,7 +11,12 @@ class PurchaseFood extends StatefulWidget {
   final Vendor vendor;
   final String studentID;
 
-  const PurchaseFood({Key key, @ required this.food, @required this.vendor, @required this.studentID}) : super(key: key);
+  const PurchaseFood(
+      {Key key,
+      @required this.food,
+      @required this.vendor,
+      @required this.studentID})
+      : super(key: key);
   @override
   _PurchaseFoodState createState() => _PurchaseFoodState();
 }
@@ -40,7 +45,7 @@ class _PurchaseFoodState extends State<PurchaseFood> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 30.0,
-                color: Colors.lightBlueAccent,
+                color: Colors.blueAccent,
               ),
             ),
             Container(
@@ -49,12 +54,15 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                 children: <Widget>[
                   Container(
                     child: ReusableCard(
-                        color: Colors.lightBlueAccent,
+                        color: Colors.deepOrangeAccent,
                         cardChild: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             IconButton(
-                              icon: Icon(FontAwesomeIcons.minus, color: Colors.white,),
+                              icon: Icon(
+                                FontAwesomeIcons.minus,
+                                color: Colors.white,
+                              ),
                               onPressed: () {
                                 setState(() {
                                   quantity > 1 ? quantity-- : quantity;
@@ -69,10 +77,12 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                               children: [
                                 Text(
                                   'QUANTITY',
+                                  style: TextStyle(color: Colors.white),
                                   //style: kTextStyle,
                                 ),
                                 Text(
                                   quantity.toString(),
+                                  style: TextStyle(color: Colors.white),
                                   //style: kNumberStyle,
                                 ),
                               ],
@@ -81,10 +91,15 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                               width: 10.0,
                             ),
                             IconButton(
-                              icon: Icon(FontAwesomeIcons.plus, color: Colors.white,),
+                              icon: Icon(
+                                FontAwesomeIcons.plus,
+                                color: Colors.white,
+                              ),
                               onPressed: () {
                                 setState(() {
-                                  quantity>= widget.food.stock ? quantity : quantity++;
+                                  quantity >= widget.food.stock
+                                      ? quantity
+                                      : quantity++;
                                 });
                               },
                             ),
@@ -98,12 +113,13 @@ class _PurchaseFoodState extends State<PurchaseFood> {
               child: Text(
                 'Confirm',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.blueAccent,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              color: Colors.lightBlueAccent,
               onPressed: () {
-                DataService(uid: widget.studentID).orderFood(widget.food, quantity, DateTime.now(), widget.vendor);
+                DataService(uid: widget.studentID).orderFood(
+                    widget.food, quantity, DateTime.now(), widget.vendor);
                 Navigator.pop(context);
               },
             ),

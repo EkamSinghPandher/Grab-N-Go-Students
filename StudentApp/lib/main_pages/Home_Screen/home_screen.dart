@@ -1,3 +1,4 @@
+import 'package:StudentApp/main_pages/Home_Screen/promotion.dart';
 import 'package:StudentApp/main_pages/appBar.dart';
 import 'package:StudentApp/Models/Student.dart';
 import 'package:provider/provider.dart';
@@ -13,12 +14,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   int current = 0;
   Widget build(BuildContext context) {
     Student stud = Provider.of<Student>(context);
     return Scaffold(
-      appBar: topBar(context, null),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,13 +25,22 @@ class _HomeScreenState extends State<HomeScreen> {
             Carousell(),
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('Places near you'),
+              child: Text(
+                'Places near you',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
-            HorizontalList(studentID: stud.uid,),
+            HorizontalList(
+              studentID: stud.uid,
+            ),
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('Promotion'),
+              child: Text(
+                'Daily Promotion and Offer',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
+            Promotion(),
           ],
         ),
       ),
