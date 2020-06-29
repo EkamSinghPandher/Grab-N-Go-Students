@@ -26,7 +26,6 @@ class _HorizontalListState extends State<HorizontalList> {
   bool isLoading = true;
 
   List<Location> geoSort(List<Location> list) {
-    List<Location> ans = new List();
     list.sort(
       (a, b) => distanceTo(a, current).compareTo(distanceTo(b, current)),
     );

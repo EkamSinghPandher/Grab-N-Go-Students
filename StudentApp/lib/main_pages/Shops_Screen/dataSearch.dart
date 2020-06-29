@@ -1,5 +1,4 @@
 import 'package:StudentApp/Models/LocationList.dart';
-import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/subpages/singleStall.dart';
 import 'package:provider/provider.dart';

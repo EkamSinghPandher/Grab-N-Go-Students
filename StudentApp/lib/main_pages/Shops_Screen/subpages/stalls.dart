@@ -1,4 +1,3 @@
-import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/subpages/singleStall.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +10,10 @@ class Stalls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Vendor> vendorList = Provider.of<List<Vendor>>(context,);
-    List<Vendor> stallList = vendorList == null ? [] :vendorList;
+    List<Vendor> vendorList = Provider.of<List<Vendor>>(
+      context,
+    );
+    List<Vendor> stallList = vendorList == null ? [] : vendorList;
     return GridView.builder(
       itemCount: stallList.length,
       gridDelegate:
@@ -26,4 +27,3 @@ class Stalls extends StatelessWidget {
     );
   }
 }
-

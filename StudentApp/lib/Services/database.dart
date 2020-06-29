@@ -114,20 +114,6 @@ class DataService {
     return snapshot.documents.map((e) => Order.fromJson(e.data)).toList();
   }
 
-  //Order is collected
-  Future collectedOrder(Order order) async {
-    vendorsCollection
-        .document(order.vendorUID)
-        .collection('Orders')
-        .document(order.orderID)
-        .delete();
-    return await studentsCollection
-        .document(order.studentUID)
-        .collection('Orders')
-        .document(order.orderID)
-        .setData(order.toJson());
-  }
-
   Future orderFood(
     Food food,
     int quantity,

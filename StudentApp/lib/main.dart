@@ -23,7 +23,7 @@ class GrabNGo extends StatelessWidget {
         child: StreamProvider<List<Location>>(
           create: (_) => DataService().locations,
           child: StreamProvider<List<Vendor>>(
-            create: (_)=> DataService().vendors,
+            create: (_) => DataService().vendors,
             child: MaterialApp(
               home: Wrapper(),
               routes: {

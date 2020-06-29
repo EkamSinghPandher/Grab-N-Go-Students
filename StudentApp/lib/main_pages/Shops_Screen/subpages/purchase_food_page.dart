@@ -1,8 +1,9 @@
 import 'package:StudentApp/Models/Food.dart';
-import 'package:StudentApp/Models/Student.dart';
-import 'package:StudentApp/Models/User.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/Services/database.dart';
+import 'package:StudentApp/main_pages/History_Current_Screen/history_screen.dart';
+import 'package:StudentApp/main_pages/Home_Screen/home_screen.dart';
+import 'package:StudentApp/main_pages/page_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -11,7 +12,12 @@ class PurchaseFood extends StatefulWidget {
   final Vendor vendor;
   final String studentID;
 
-  const PurchaseFood({Key key, @ required this.food, @required this.vendor, @required this.studentID}) : super(key: key);
+  const PurchaseFood(
+      {Key key,
+      @required this.food,
+      @required this.vendor,
+      @required this.studentID})
+      : super(key: key);
   @override
   _PurchaseFoodState createState() => _PurchaseFoodState();
 }
@@ -54,10 +60,15 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             IconButton(
-                              icon: Icon(FontAwesomeIcons.minus, color: Colors.white,),
+                              icon: Icon(
+                                FontAwesomeIcons.minus,
+                                color: Colors.white,
+                              ),
                               onPressed: () {
                                 setState(() {
-                                  quantity > 1 ? quantity-- : quantity;
+                                  if (quantity > 0) {
+                                    quantity--;
+                                  }
                                 });
                               },
                             ),
@@ -81,10 +92,15 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                               width: 10.0,
                             ),
                             IconButton(
-                              icon: Icon(FontAwesomeIcons.plus, color: Colors.white,),
+                              icon: Icon(
+                                FontAwesomeIcons.plus,
+                                color: Colors.white,
+                              ),
                               onPressed: () {
                                 setState(() {
-                                  quantity>= widget.food.stock ? quantity : quantity++;
+                                  quantity >= widget.food.stock
+                                      ? quantity
+                                      : quantity++;
                                 });
                               },
                             ),
@@ -103,8 +119,12 @@ class _PurchaseFoodState extends State<PurchaseFood> {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                DataService(uid: widget.studentID).orderFood(widget.food, quantity, DateTime.now(), widget.vendor);
-                Navigator.pop(context);
+                DataService(uid: widget.studentID).orderFood(
+                    widget.food, quantity, DateTime.now(), widget.vendor);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => PageLogic()),
+                    ModalRoute.withName(PageLogic.id));
               },
             ),
           ],

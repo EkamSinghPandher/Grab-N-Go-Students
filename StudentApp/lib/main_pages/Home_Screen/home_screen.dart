@@ -13,29 +13,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   int current = 0;
   Widget build(BuildContext context) {
     Student stud = Provider.of<Student>(context);
-    return Scaffold(
-      appBar: topBar(context, null),
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Carousell(),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('Places near you'),
+    return stud == null
+        ? CircularProgressIndicator()
+        : Scaffold(
+            appBar: topBar(context, null),
+            body: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Carousell(),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Places near you'),
+                  ),
+                  HorizontalList(
+                    studentID: stud.uid,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Promotion'),
+                  ),
+                ],
+              ),
             ),
-            HorizontalList(studentID: stud.uid,),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('Promotion'),
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }

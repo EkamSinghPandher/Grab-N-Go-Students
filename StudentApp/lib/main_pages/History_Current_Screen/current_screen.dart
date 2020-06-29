@@ -17,11 +17,18 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<ChatTile> curr = widget.orderList
+        .where((element) => element.isCollected == false)
+        .toList()
+        .map((e) => ChatTile(
+              order: e,
+            ))
+        .toList();
     return Scaffold(
-      appBar: topBar(context, null),
       body: SafeArea(
         child: Column(
           children: [
+            SizedBox(height: 25),
             Padding(
               padding: const EdgeInsets.all(14.0),
               child: Row(
@@ -49,31 +56,12 @@ class _CurrentScreenState extends State<CurrentScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(20),
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    icon: Icon(Icons.search),
-                    hintText: "Search Username"),
-              ),
-            ),
-            Container(
                 child: SingleChildScrollView(
-              child: Column(
-                  children: widget.orderList == null
-                      ? null
-                      : widget.orderList
-                          .where((element) => element.isCollected == false)
-                          .toList()
-                          .map((e) => ChatTile(
-                                order: e,
-                              ))
-                          .toList()),
+              child: curr.isEmpty
+                  ? Text('No orders right now')
+                  : Column(
+                      children: curr,
+                    ),
             ))
           ],
         ),
