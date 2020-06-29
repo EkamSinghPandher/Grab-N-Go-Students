@@ -9,26 +9,29 @@ class FoodPage extends StatelessWidget {
 
   final String studentID;
 
-  FoodPage({
-    this.shop,
-    this.menu, @required this.studentID
-  });
+  FoodPage({this.shop, this.menu, @required this.studentID});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        leading: null,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              //Implement logout functionality
-            },
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.grey,
           ),
-        ],
-        title: Text('Food'),
-        backgroundColor: Colors.lightBlueAccent,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          "Food",
+          style: TextStyle(
+            color: Colors.deepOrangeAccent,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.white,
       ),
       body: SafeArea(
         child: ListView(
@@ -59,7 +62,11 @@ class FoodPage extends StatelessWidget {
             ),
             Container(
               height: 300,
-              child: fc.Food(vendor: shop, foodList:menu, studentID: studentID,),
+              child: fc.Food(
+                vendor: shop,
+                foodList: menu,
+                studentID: studentID,
+              ),
             ),
           ],
         ),

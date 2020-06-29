@@ -19,16 +19,23 @@ class StallPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          leading: null,
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  //Implement logout functionality
-                }),
-          ],
-          title: Text('Shop'),
-          backgroundColor: Colors.lightBlueAccent,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.grey,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Text(
+            location,
+            style: TextStyle(
+              color: Colors.deepOrangeAccent,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          backgroundColor: Colors.white,
         ),
         body: SafeArea(
           child: Column(

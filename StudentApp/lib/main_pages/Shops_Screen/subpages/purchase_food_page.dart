@@ -46,7 +46,7 @@ class _PurchaseFoodState extends State<PurchaseFood> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 30.0,
-                color: Colors.lightBlueAccent,
+                color: Colors.blueAccent,
               ),
             ),
             Container(
@@ -55,7 +55,7 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                 children: <Widget>[
                   Container(
                     child: ReusableCard(
-                        color: Colors.lightBlueAccent,
+                        color: Colors.deepOrangeAccent,
                         cardChild: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -80,10 +80,12 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                               children: [
                                 Text(
                                   'QUANTITY',
+                                  style: TextStyle(color: Colors.white),
                                   //style: kTextStyle,
                                 ),
                                 Text(
                                   quantity.toString(),
+                                  style: TextStyle(color: Colors.white),
                                   //style: kNumberStyle,
                                 ),
                               ],
@@ -114,10 +116,10 @@ class _PurchaseFoodState extends State<PurchaseFood> {
               child: Text(
                 'Confirm',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.blueAccent,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              color: Colors.lightBlueAccent,
               onPressed: () {
                 DataService(uid: widget.studentID).orderFood(
                     widget.food, quantity, DateTime.now(), widget.vendor);
