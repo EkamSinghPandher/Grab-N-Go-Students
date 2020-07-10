@@ -1,9 +1,9 @@
 import 'package:StudentApp/Services/auth.dart';
+import 'package:StudentApp/main_pages/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:StudentApp/components/roundedButton.dart';
 import 'package:StudentApp/components/constants.dart';
 import './Wrapper.dart';
-
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';
@@ -84,14 +84,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   color: Colors.blueAccent,
                   onPressed: () async {
                     if (formKey.currentState.validate()) {
-                      dynamic result = await _auth.registerUser(email, password);
+                      dynamic result =
+                          await _auth.registerUser(email, password);
                       if (result == null) {
                         setState(() {
                           errorMsg =
                               'Please enter a unused or valid email or password';
                         });
-                      }else{
-                        Navigator.of(context).pushReplacementNamed(Wrapper.id);
+                      } else {
+                        Navigator.of(context)
+                            .pushReplacementNamed(LoginScreen.id);
                       }
                     }
                   },

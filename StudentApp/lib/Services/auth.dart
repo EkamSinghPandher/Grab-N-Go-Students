@@ -20,7 +20,8 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      return _userFromData(user);
+      if (user.isEmailVerified) return _userFromData(user);
+      return null;
     } catch (error) {
       return null;
     }
@@ -36,8 +37,10 @@ class AuthService {
         uid: user.uid,
         email: user.email,
       ));
+      await user.sendEmailVerification();
       return _userFromData(user);
     } catch (error) {
+      print("error occured while sending email verification");
       return null;
     }
   }
@@ -50,5 +53,19 @@ class AuthService {
       print(error.toString());
       return null;
     }
+  }
+
+  Future<FirebaseUser> getCurrentUser() async {
+    return await _auth.currentUser();
+  }
+
+  Future<void> sendEmailVerification() async {
+    var user = await _auth.currentUser();
+    user.sendEmailVerification();
+  }
+
+  Future<bool> isEmailVerified() async {
+    var user = await _auth.currentUser();
+    return user.isEmailVerified;
   }
 }
