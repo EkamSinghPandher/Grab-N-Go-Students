@@ -1,8 +1,6 @@
 import 'package:StudentApp/Models/Food.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/Services/database.dart';
-import 'package:StudentApp/main_pages/History_Current_Screen/history_screen.dart';
-import 'package:StudentApp/main_pages/Home_Screen/home_screen.dart';
 import 'package:StudentApp/main_pages/page_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -101,6 +99,7 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                               onPressed: () {
                                 setState(() {
                                   quantity >= widget.food.stock
+                                      // ignore: unnecessary_statements
                                       ? quantity
                                       : quantity++;
                                 });
