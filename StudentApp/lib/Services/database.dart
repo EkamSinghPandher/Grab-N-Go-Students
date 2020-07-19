@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:StudentApp/Models/Food.dart';
+import 'package:StudentApp/Models/Message.dart';
 import 'package:StudentApp/Models/Order.dart';
 import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
@@ -165,5 +166,39 @@ class DataService {
         .collection('Orders')
         .document(orderID)
         .setData(newOrder.toJson());
+  }
+
+  //Get Stream of messages from an order
+  Stream<List<Message>> messagesFromOrder(Order order) {
+    return studentsCollection
+        .document(uid)
+        .collection('Orders')
+        .document(order.orderID)
+        .collection("Messages")
+        .snapshots()
+        .map(messagesFromSnapshot);
+  }
+
+  //get a list of messages from a snapshot
+  List<Message> messagesFromSnapshot(QuerySnapshot snaphsot) {
+    return snaphsot.documents.map((e) => Message.fromJson(e.data)).toList();
+  }
+
+  //send message
+  Future sendMessage(Order order, Message message) async {
+    await studentsCollection
+        .document(order.vendorUID)
+        .collection('Orders')
+        .document(order.orderID)
+        .collection("Messages")
+        .document(message.time.toIso8601String())
+        .setData(message.toJson());
+    vendorsCollection
+        .document(order.studentUID)
+        .collection('Orders')
+        .document(order.orderID)
+        .collection("Messages")
+        .document(message.time.toIso8601String())
+        .setData(message.toJson());
   }
 }
