@@ -22,38 +22,21 @@ class _ShopScreenState extends State<ShopScreen> {
             appBar: topBar(
               context,
               IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.black,
-                    size: 25,
-                  ),
-                  onPressed: () {
-                    showSearch(
-                        context: context, delegate: DataSearch(stud.uid));
-                  }),
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.black,
+                  size: 30,
+                ),
+                onPressed: () {
+                  showSearch(context: context, delegate: DataSearch(stud.uid));
+                },
+              ),
+              "Locations",
             ),
             body: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /*Container(
-              padding: EdgeInsets.all(20.0),
-              child: TextField(
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-                decoration: kInputDecoration,
-                onChanged: (value) {
-                  setState(() {
-                    foodOrLocation = value;
-                  });
-                },
-              ),
-            ),*/
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Locations'),
-                  ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.73,
                     child: LocationsList(studentID: stud.uid),

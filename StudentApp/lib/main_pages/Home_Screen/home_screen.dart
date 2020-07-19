@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return stud == null
         ? CircularProgressIndicator()
         : Scaffold(
-            appBar: topBar(context, null),
+            appBar: topBar(context, null, "Discover"),
             body: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

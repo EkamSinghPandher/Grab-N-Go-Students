@@ -14,7 +14,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     Student student = Provider.of<Student>(context);
     return Scaffold(
-      appBar: topBar(context, null),
       body: student == null
           ? CircularProgressIndicator()
           : SafeArea(
