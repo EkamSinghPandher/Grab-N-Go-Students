@@ -1,7 +1,7 @@
-import './subpages/stall_page.dart';
+import 'package:StudentApp/main_pages/Shops_Screen/subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
-class LocationCard extends StatelessWidget {
+class NearLocations extends StatelessWidget {
   final double width;
   final double height;
   final String imageLocation;
@@ -9,7 +9,7 @@ class LocationCard extends StatelessWidget {
 
   final String studentID;
 
-  LocationCard(
+  NearLocations(
       {this.imageLocation,
       this.locationName,
       this.width,
@@ -30,31 +30,29 @@ class LocationCard extends StatelessWidget {
           ),
         ),
         child: Container(
-          //padding: EdgeInsets.all(20),
-          width: width,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(0, 4),
-                blurRadius: 20,
-                color: Color(0xFFB0CCE1).withOpacity(0.32),
-              ),
-            ],
-          ),
+          width: width * 1.2,
           child: Container(
             margin: EdgeInsets.only(bottom: 25),
             child: ListTile(
-              title: Image.network(
-                imageLocation,
-                width: width,
-                height: height,
-                fit: BoxFit.fill,
+              title: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.network(
+                  imageLocation,
+                  width: width * 1.2,
+                  height: height * 1.2,
+                  fit: BoxFit.fill,
+                ),
               ),
               subtitle: Container(
                 padding: EdgeInsets.only(top: 8),
-                child: Text(locationName),
+                child: Text(
+                  locationName,
+                  style: TextStyle(
+                    color: Colors.blue.shade900,
+                    fontFamily: 'Montserrat',
+                    fontSize: 15,
+                  ),
+                ),
                 alignment: Alignment.topCenter,
               ),
             ),

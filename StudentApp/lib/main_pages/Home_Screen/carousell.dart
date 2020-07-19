@@ -20,21 +20,30 @@ class Carousell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Vendor> vendors = Provider.of<List<Vendor>>(context);
-    return Container(
-      height: 150.0,
-      child: vendors == null
-          ? CircularProgressIndicator()
-          : new Carousel(
-              boxFit: BoxFit.cover,
-              images: shuffle(vendors)
-                  .take(8)
-                  .toList()
-                  .map((e) => Image.network(e.stallImage))
-                  .toList(),
-              autoplay: false,
-              dotSize: 4.0,
-              indicatorBgPadding: 8.0,
-            ),
+    return Center(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10.0),
+        child: Container(
+          height: 170.0,
+          width: 280,
+          child: vendors == null
+              ? CircularProgressIndicator()
+              : new Carousel(
+                  boxFit: BoxFit.cover,
+                  images: shuffle(vendors)
+                      .take(8)
+                      .toList()
+                      .map((e) => Image.network(
+                            e.stallImage,
+                            fit: BoxFit.fill,
+                          ))
+                      .toList(),
+                  autoplay: false,
+                  dotSize: 4.0,
+                  indicatorBgPadding: 8.0,
+                ),
+        ),
+      ),
     );
   }
 }
