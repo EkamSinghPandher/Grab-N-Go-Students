@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'LocationList.g.dart';
 
 @JsonSerializable()
-class Location{
+class Location {
   final String name;
   final String imageURL;
 
@@ -21,6 +21,7 @@ class Location{
 
   Location({this.name, this.imageURL, this.location});
 
-  factory Location.fromJson(Map<String, dynamic> json) =>_$LocationFromJson(json);
+  factory Location.fromJson(Map<String, dynamic> json) =>
+      _$LocationFromJson(json);
   Map<String, dynamic> toJson() => _$LocationToJson(this);
 }
