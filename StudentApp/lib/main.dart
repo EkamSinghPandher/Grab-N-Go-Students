@@ -4,7 +4,6 @@ import 'package:StudentApp/Services/auth.dart';
 import 'package:StudentApp/Services/database.dart';
 import 'package:StudentApp/main_pages/login/login_screen.dart';
 import 'package:StudentApp/main_pages/login/registration_screen.dart';
-import 'package:StudentApp/main_pages/login/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:StudentApp/main_pages/page_logic.dart';
@@ -28,7 +27,6 @@ class GrabNGo extends StatelessWidget {
               home: Wrapper(),
               routes: {
                 Wrapper.id: (context) => Wrapper(),
-                WelcomeScreen.id: (context) => WelcomeScreen(),
                 LoginScreen.id: (context) => LoginScreen(),
                 RegistrationScreen.id: (context) => RegistrationScreen(),
                 PageLogic.id: (context) => PageLogic(),
