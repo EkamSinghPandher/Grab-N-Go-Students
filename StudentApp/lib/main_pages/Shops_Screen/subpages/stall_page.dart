@@ -31,8 +31,9 @@ class StallPage extends StatelessWidget {
           title: Text(
             location,
             style: TextStyle(
-              color: Colors.deepOrangeAccent,
-              fontWeight: FontWeight.bold,
+              color: Colors.blue.shade800,
+              fontFamily: "Montserrat",
+              fontSize: 25.0,
             ),
           ),
           backgroundColor: Colors.white,
