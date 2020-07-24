@@ -43,7 +43,13 @@ class SingleFood extends StatelessWidget {
   final price;
   final String studentID;
 
-  SingleFood({this.name, this.picture, this.price, this.vendor, this.food, this.studentID});
+  SingleFood(
+      {this.name,
+      this.picture,
+      this.price,
+      this.vendor,
+      this.food,
+      this.studentID});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +65,11 @@ class SingleFood extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: PurchaseFood(vendor: vendor, food: food, studentID: studentID,),
+                    child: PurchaseFood(
+                      vendor: vendor,
+                      food: food,
+                      studentID: studentID,
+                    ),
                   ),
                 ),
               );
@@ -67,14 +77,16 @@ class SingleFood extends StatelessWidget {
             child: GridTile(
               footer: Container(
                 color: Colors.white70,
-                child: ListTile(
-                  leading: Text(
-                    name,
-                  ),
-                  title: Text(
-                    (price/100).toString(),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                child: Column(
+                  children: [
+                    Text(
+                      name,
+                    ),
+                    Text(
+                      '\$ ' + (price / 100).toString(),
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
               ),
               child: Image.network(

@@ -24,8 +24,8 @@ class Carousell extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: Container(
-          height: 170.0,
-          width: 280,
+          height: 180.0,
+          width: 290,
           child: vendors == null
               ? CircularProgressIndicator()
               : new Carousel(

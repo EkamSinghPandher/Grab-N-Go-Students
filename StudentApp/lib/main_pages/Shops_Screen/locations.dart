@@ -12,7 +12,6 @@ class LocationsList extends StatefulWidget {
 }
 
 class _LocationsListState extends State<LocationsList> {
-
   @override
   Widget build(BuildContext context) {
     List<Location> locations = Provider.of<List<Location>>(context);

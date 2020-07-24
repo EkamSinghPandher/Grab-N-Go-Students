@@ -38,7 +38,7 @@ class FoodPage extends StatelessWidget {
         child: ListView(
           children: [
             Container(
-              height: 250.0,
+              height: 200.0,
               child: GridTile(
                 child: Container(
                   color: Colors.white,
@@ -47,18 +47,13 @@ class FoodPage extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                footer: Container(
-                  color: Colors.white70,
-                  child: ListTile(
-                    leading: Text(
-                      shop.stallName,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                shop.stallName,
+                style: TextStyle(fontSize: 23, fontFamily: 'Montserrat'),
               ),
             ),
             Container(

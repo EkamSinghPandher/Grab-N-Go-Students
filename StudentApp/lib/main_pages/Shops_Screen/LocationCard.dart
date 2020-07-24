@@ -30,31 +30,29 @@ class LocationCard extends StatelessWidget {
           ),
         ),
         child: Container(
-          //padding: EdgeInsets.all(20),
           width: width,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(0, 4),
-                blurRadius: 20,
-                color: Color(0xFFB0CCE1).withOpacity(0.32),
-              ),
-            ],
-          ),
           child: Container(
-            margin: EdgeInsets.only(bottom: 25),
+            margin: EdgeInsets.only(bottom: 20),
             child: ListTile(
-              title: Image.network(
-                imageLocation,
-                width: width,
-                height: height,
-                fit: BoxFit.fill,
+              title: ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image.network(
+                  imageLocation,
+                  width: width,
+                  height: height,
+                  fit: BoxFit.fill,
+                ),
               ),
               subtitle: Container(
                 padding: EdgeInsets.only(top: 8),
-                child: Text(locationName),
+                child: Text(
+                  locationName,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Montserrat',
+                    fontSize: 20.0,
+                  ),
+                ),
                 alignment: Alignment.topCenter,
               ),
             ),

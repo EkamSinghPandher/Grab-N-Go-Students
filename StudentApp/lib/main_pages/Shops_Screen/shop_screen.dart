@@ -1,4 +1,5 @@
 import 'package:StudentApp/Models/Student.dart';
+import 'package:StudentApp/main_pages/Shops_Screen/shops_background.dart';
 import 'package:StudentApp/main_pages/appBar.dart';
 import 'package:provider/provider.dart';
 
@@ -33,15 +34,18 @@ class _ShopScreenState extends State<ShopScreen> {
               ),
               "Locations",
             ),
-            body: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.73,
-                    child: LocationsList(studentID: stud.uid),
-                  )
-                ],
+            body: CustomPaint(
+              painter: ShopBackground(),
+              child: SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      child: LocationsList(studentID: stud.uid),
+                    )
+                  ],
+                ),
               ),
             ),
           );

@@ -1,5 +1,6 @@
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/Services/database.dart';
+import 'package:StudentApp/main_pages/Shops_Screen/shops_background.dart';
 import 'package:provider/provider.dart';
 
 import 'stalls.dart';
@@ -38,18 +39,17 @@ class StallPage extends StatelessWidget {
           ),
           backgroundColor: Colors.white,
         ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Stalls'),
-              ),
-              Container(
-                height: 550,
-                child: Stalls(studentID: studentID),
-              )
-            ],
+        body: CustomPaint(
+          painter: ShopBackground(),
+          child: SafeArea(
+            child: Column(
+              children: [
+                Container(
+                  height: 550,
+                  child: Stalls(studentID: studentID),
+                )
+              ],
+            ),
           ),
         ),
       ),

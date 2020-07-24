@@ -20,15 +20,25 @@ class _HomeScreenState extends State<HomeScreen> {
     return stud == null
         ? CircularProgressIndicator()
         : Scaffold(
-            appBar: topBar(context, null, "Discover"),
             body: CustomPaint(
               painter: HomeBackground(),
               child: SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        "Discover",
+                        style: TextStyle(
+                          color: Colors.blue.shade800,
+                          fontFamily: 'Montserrat',
+                          fontSize: 30.0,
+                        ),
+                      ),
+                    ),
                     SizedBox(
-                      height: 15.0,
+                      height: 10.0,
                     ),
                     Carousell(),
                     SizedBox(

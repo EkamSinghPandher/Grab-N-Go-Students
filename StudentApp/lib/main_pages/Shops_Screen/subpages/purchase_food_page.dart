@@ -45,6 +45,7 @@ class _PurchaseFoodState extends State<PurchaseFood> {
               style: TextStyle(
                 fontSize: 30.0,
                 color: Colors.blueAccent,
+                fontFamily: "Montserrat",
               ),
             ),
             Container(
@@ -53,69 +54,69 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                 children: <Widget>[
                   Container(
                     child: ReusableCard(
-                        color: Colors.deepOrangeAccent,
+                        //color: Colors.deepOrangeAccent,
                         cardChild: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            FontAwesomeIcons.minus,
+                            color: Colors.blue.shade800,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              if (quantity > 0) {
+                                quantity--;
+                              }
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            IconButton(
-                              icon: Icon(
-                                FontAwesomeIcons.minus,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (quantity > 0) {
-                                    quantity--;
-                                  }
-                                });
-                              },
+                            Text(
+                              'QUANTITY',
+                              style: TextStyle(color: Colors.blue.shade800),
+                              //style: kTextStyle,
                             ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'QUANTITY',
-                                  style: TextStyle(color: Colors.white),
-                                  //style: kTextStyle,
-                                ),
-                                Text(
-                                  quantity.toString(),
-                                  style: TextStyle(color: Colors.white),
-                                  //style: kNumberStyle,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                FontAwesomeIcons.plus,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  quantity >= widget.food.stock
-                                      // ignore: unnecessary_statements
-                                      ? quantity
-                                      : quantity++;
-                                });
-                              },
+                            Text(
+                              quantity.toString(),
+                              style: TextStyle(color: Colors.blue.shade800),
+                              //style: kNumberStyle,
                             ),
                           ],
-                        )),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            FontAwesomeIcons.plus,
+                            color: Colors.blue.shade800,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              quantity >= widget.food.stock
+                                  // ignore: unnecessary_statements
+                                  ? quantity
+                                  : quantity++;
+                            });
+                          },
+                        ),
+                      ],
+                    )),
                   ),
                 ],
               ),
             ),
             FlatButton(
               child: Text(
-                'Confirm',
+                'CONFIRM',
                 style: TextStyle(
-                  color: Colors.blueAccent,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
