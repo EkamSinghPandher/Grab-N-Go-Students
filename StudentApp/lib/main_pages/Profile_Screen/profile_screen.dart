@@ -1,7 +1,6 @@
 import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Services/auth.dart';
 import 'package:StudentApp/main_pages/Profile_Screen/profile_background.dart';
-import 'package:StudentApp/main_pages/appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

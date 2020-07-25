@@ -123,6 +123,7 @@ class DataService {
   ) async {
     String orderID = Random(DateTime.now().hashCode).nextInt(999999).toString();
     Order newOrder = Order(
+        orderImage: food.foodImage,
         dateTime: dateTime,
         vendorUID: vendor.uid,
         studentUID: uid,

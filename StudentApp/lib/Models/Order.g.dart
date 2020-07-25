@@ -8,6 +8,7 @@ part of 'Order.dart';
 
 Order _$OrderFromJson(Map<String, dynamic> json) {
   return Order(
+    orderImage: json['orderImage'] as String,
     vendorUID: json['vendorUID'] as String,
     studentUID: json['studentUID'] as String,
     dateTime: json['dateTime'] == null
@@ -32,4 +33,5 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'quantity': instance.quantity,
       'isDone': instance.isDone,
       'isCollected': instance.isCollected,
+      'orderImage': instance.orderImage
     };
