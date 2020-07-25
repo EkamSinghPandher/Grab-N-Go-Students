@@ -4,7 +4,6 @@ import 'package:StudentApp/Models/LocationList.dart';
 import 'package:StudentApp/main_pages/Home_Screen/near_you_locations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Shops_Screen/LocationCard.dart';
 import 'package:geolocator/geolocator.dart';
 
 class HorizontalList extends StatefulWidget {

@@ -4,7 +4,6 @@ import 'package:StudentApp/components/roundedButton.dart';
 import 'package:flutter/material.dart';
 
 import 'TextInput.dart';
-import 'Wrapper.dart';
 import 'login_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {

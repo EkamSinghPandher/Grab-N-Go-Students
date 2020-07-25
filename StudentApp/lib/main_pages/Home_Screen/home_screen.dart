@@ -1,5 +1,4 @@
 import 'package:StudentApp/main_pages/Home_Screen/home_background.dart';
-import 'package:StudentApp/main_pages/appBar.dart';
 import 'package:StudentApp/Models/Student.dart';
 import 'package:provider/provider.dart';
 

@@ -13,9 +13,11 @@ class Order {
   final int quantity;
   final bool isDone;
   final bool isCollected;
+  final String orderImage;
 
   Order(
-      {this.vendorUID,
+      {this.orderImage,
+      this.vendorUID,
       this.studentUID,
       this.dateTime,
       this.foodName,
