@@ -4,6 +4,9 @@ import 'package:StudentApp/Services/database.dart';
 import 'package:StudentApp/main_pages/page_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:square_in_app_payments/in_app_payments.dart';
+import 'package:square_in_app_payments/models.dart';
+import 'package:stripe_payment/stripe_payment.dart';
 
 class PurchaseFood extends StatefulWidget {
   final Food food;
@@ -22,6 +25,14 @@ class PurchaseFood extends StatefulWidget {
 
 class _PurchaseFoodState extends State<PurchaseFood> {
   int quantity = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    StripePayment.setOptions(StripeOptions(
+        publishableKey:
+            'pk_test_51H8m1jKoQQFZlp0JvTXIGIKeugXPJVPZIXXiSUN51cV0Vm1qhbH6STEjbyoWGIDbLuEc25IOq4VSQELuU1dCr8IN00lv8OPlHQ'));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,63 +65,70 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                 children: <Widget>[
                   Container(
                     child: ReusableCard(
-                        //color: Colors.deepOrangeAccent,
+                        color: Colors.white,
                         cardChild: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            FontAwesomeIcons.minus,
-                            color: Colors.blue.shade800,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              if (quantity > 0) {
-                                quantity--;
-                              }
-                            });
-                          },
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'QUANTITY',
-                              style: TextStyle(color: Colors.blue.shade800),
-                              //style: kTextStyle,
+                            IconButton(
+                              icon: Icon(
+                                FontAwesomeIcons.minus,
+                                color: Colors.blue.shade800,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (quantity > 0) {
+                                    quantity--;
+                                  }
+                                });
+                              },
                             ),
-                            Text(
-                              quantity.toString(),
-                              style: TextStyle(color: Colors.blue.shade800),
-                              //style: kNumberStyle,
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'QUANTITY',
+                                  style: TextStyle(color: Colors.blue.shade800),
+                                  //style: kTextStyle,
+                                ),
+                                Text(
+                                  quantity.toString(),
+                                  style: TextStyle(color: Colors.blue.shade800),
+                                  //style: kNumberStyle,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                FontAwesomeIcons.plus,
+                                color: Colors.blue.shade800,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  quantity >= widget.food.stock
+                                      // ignore: unnecessary_statements
+                                      ? quantity
+                                      : quantity++;
+                                });
+                              },
                             ),
                           ],
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            FontAwesomeIcons.plus,
-                            color: Colors.blue.shade800,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              quantity >= widget.food.stock
-                                  // ignore: unnecessary_statements
-                                  ? quantity
-                                  : quantity++;
-                            });
-                          },
-                        ),
-                      ],
-                    )),
+                        )),
                   ),
                 ],
               ),
+            ),
+            FlatButton(
+              child: Text(
+                'Add or change Card',
+                style: TextStyle(fontSize: 15.0, color: Colors.lightBlueAccent),
+              ),
+              onPressed: () {},
             ),
             FlatButton(
               child: Text(
@@ -133,6 +151,21 @@ class _PurchaseFoodState extends State<PurchaseFood> {
         ),
       ),
     );
+  }
+
+  _squarePayment() async {
+    await InAppPayments.setSquareApplicationId('sq0idp-_pqcBeHgzPTL6DeEFmUCwQ');
+    await InAppPayments.startCardEntryFlow(
+        onCardNonceRequestSuccess: (CardDetails result) {
+          try {
+            InAppPayments.completeCardEntry(
+                onCardEntryComplete: () => print('yay'));
+          } on Exception catch (ex) {
+            print('problem');
+            InAppPayments.showCardNonceProcessingError(ex.toString());
+          }
+        },
+        onCardEntryCancel: () {});
   }
 }
 
