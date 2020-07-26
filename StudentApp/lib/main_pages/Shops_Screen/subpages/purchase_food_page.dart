@@ -1,11 +1,10 @@
 import 'package:StudentApp/Models/Food.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/Services/database.dart';
+import 'package:StudentApp/Services/payment.dart';
 import 'package:StudentApp/main_pages/page_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:square_in_app_payments/in_app_payments.dart';
-import 'package:square_in_app_payments/models.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 
 class PurchaseFood extends StatefulWidget {
@@ -27,15 +26,8 @@ class _PurchaseFoodState extends State<PurchaseFood> {
   int quantity = 1;
 
   @override
-  void initState() {
-    super.initState();
-    StripePayment.setOptions(StripeOptions(
-        publishableKey:
-            'pk_test_51H8m1jKoQQFZlp0JvTXIGIKeugXPJVPZIXXiSUN51cV0Vm1qhbH6STEjbyoWGIDbLuEc25IOq4VSQELuU1dCr8IN00lv8OPlHQ'));
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Payment payment = Payment.initialize();
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -128,7 +120,9 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                 'Add or change Card',
                 style: TextStyle(fontSize: 15.0, color: Colors.lightBlueAccent),
               ),
-              onPressed: () {},
+              onPressed: () {
+                payment.addCard();
+              },
             ),
             FlatButton(
               child: Text(
@@ -152,7 +146,7 @@ class _PurchaseFoodState extends State<PurchaseFood> {
       ),
     );
   }
-
+/*
   _squarePayment() async {
     await InAppPayments.setSquareApplicationId('sq0idp-_pqcBeHgzPTL6DeEFmUCwQ');
     await InAppPayments.startCardEntryFlow(
@@ -166,7 +160,7 @@ class _PurchaseFoodState extends State<PurchaseFood> {
           }
         },
         onCardEntryCancel: () {});
-  }
+  }*/
 }
 
 class ReusableCard extends StatelessWidget {

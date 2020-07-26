@@ -362,6 +362,10 @@ PODS:
     - SquareInAppPaymentsSDK (= 1.4.0)
   - SquareBuyerVerificationSDK (1.3.0)
   - SquareInAppPaymentsSDK (1.4.0)
+  - Stripe (19.3.0)
+  - stripe_payment (1.0.0):
+    - Flutter
+    - Stripe (>= 19.0.1)
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -373,6 +377,7 @@ DEPENDENCIES:
   - google_api_availability (from `.symlinks/plugins/google_api_availability/ios`)
   - location_permissions (from `.symlinks/plugins/location_permissions/ios`)
   - square_in_app_payments (from `.symlinks/plugins/square_in_app_payments/ios`)
+  - stripe_payment (from `.symlinks/plugins/stripe_payment/ios`)
 
 SPEC REPOS:
   trunk:
@@ -399,6 +404,7 @@ SPEC REPOS:
     - PromisesObjC
     - SquareBuyerVerificationSDK
     - SquareInAppPaymentsSDK
+    - Stripe
 
 EXTERNAL SOURCES:
   cloud_firestore:
@@ -419,6 +425,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/location_permissions/ios"
   square_in_app_payments:
     :path: ".symlinks/plugins/square_in_app_payments/ios"
+  stripe_payment:
+    :path: ".symlinks/plugins/stripe_payment/ios"
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -453,6 +461,8 @@ SPEC CHECKSUMS:
   square_in_app_payments: 339aa5d1c828be189639090149e0fb303c2d9812
   SquareBuyerVerificationSDK: 6a73cc3b073d8e613cb1fe8643600ff9ac4d6373
   SquareInAppPaymentsSDK: 6c3293e5600c121bbdc5499ffa3b3976e2cf0054
+  Stripe: dd5bfdd5f1daed4f9ddbfb47e9449ec302f9f708
+  stripe_payment: ad86f099179edb7b9fe12b9b62ac3746d5e56802
 
 PODFILE CHECKSUM: c34e2287a9ccaa606aeceab922830efb9a6ff69a
 
