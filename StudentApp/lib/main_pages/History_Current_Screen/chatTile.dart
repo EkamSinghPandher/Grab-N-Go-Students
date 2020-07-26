@@ -1,57 +1,98 @@
 import 'package:StudentApp/Models/Order.dart';
-import 'package:StudentApp/Models/Vendor.dart';
-import 'package:StudentApp/main_pages/History_Current_Screen/OrderPage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
+
+import 'messagesScreen.dart';
 
 class ChatTile extends StatelessWidget {
   final Order order;
+  final double height;
+  final double width;
 
-  ChatTile({this.order});
-
+  const ChatTile({Key key, this.order, this.height, this.width})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
-    List<Vendor> vendors = Provider.of<List<Vendor>>(context);
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => OrderPage(
-                      order: order,
-                      vendor: vendors.firstWhere(
-                          (element) => element.uid == order.vendorUID),
-                    )));
-      },
+    return Container(
+      height: height,
+      width: width,
       child: Column(
         children: <Widget>[
-          Divider(),
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                width: 85,
-                height: 80,
-                padding: EdgeInsets.all(3),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: Image.network(vendors
-                        .firstWhere((element) => element.uid == order.vendorUID)
-                        .stallImage)),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(vendors
-                      .firstWhere((element) => element.uid == order.vendorUID)
-                      .stallName),
-                  Text(DateFormat("dd-MM-yyyy HH:mm").format(order.dateTime)),
-                ],
-              ),
-            ],
+          Container(
+            height: height * 0.8,
+            width: width * 0.9,
+            child: Row(
+              children: <Widget>[
+                Container(
+                  height: height * 0.60,
+                  width: width * 0.28,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(7),
+                    child: Image.network(
+                      order.orderImage,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 2, 0, 2),
+                  height: height * 0.6,
+                  width: width * 0.38,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Order: ${order.orderID}",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontFamily: "Montserrat",
+                              fontWeight: FontWeight.w600)),
+                      Text(
+                        "x${order.quantity.toString()} ${order.foodName}",
+                        style: TextStyle(
+                            fontSize: 11,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w300),
+                      ),
+                      Text(
+                          "Cost: \$${(order.foodPrice / 100).toStringAsFixed(2)}",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: "Montserrat",
+                              fontWeight: FontWeight.w400)),
+                      Text(
+                          "Time: ${DateFormat('HH:mm').format(order.dateTime)}",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: "Montserrat",
+                              fontWeight: FontWeight.w400))
+                    ],
+                  ),
+                ),
+                Container(
+                  height: height * 0.75,
+                  width: width * 0.2,
+                  child: IconButton(
+                    icon: Icon(Icons.message, color: Colors.blueGrey),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => ChatScreen(
+                                    order: order,
+                                  )));
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
-          Divider()
+          Divider(
+            color: Colors.black,
+            endIndent: 22,
+            indent: 22,
+            thickness: 0.7,
+          )
         ],
       ),
     );

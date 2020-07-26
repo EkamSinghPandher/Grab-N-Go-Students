@@ -61,9 +61,5 @@ flutter:
   assets:
     - images/
     - images/chicken/
-
-  fonts:
-    - family: Montserrat
-      fonts:
-        - asset: fonts/Montserrat-Light.ttf
+    - fonts/
 

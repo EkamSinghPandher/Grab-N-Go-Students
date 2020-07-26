@@ -16,54 +16,68 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     List<ChatTile> curr = widget.orderList
         .where((element) => element.isCollected == false)
         .toList()
         .map((e) => ChatTile(
+              height: height * 0.28,
+              width: width,
               order: e,
             ))
         .toList();
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(height: 25),
-            Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      "HISTORY",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "CURRENT",
+      body: Column(
+        children: [
+          Container(
+            alignment: Alignment.bottomCenter,
+            height: height * 0.1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "HISTORY",
                     style: TextStyle(
                       fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ],
-              ),
+                ),
+                Text(
+                  "CURRENT",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-            Container(
-                child: SingleChildScrollView(
-              child: curr.isEmpty
-                  ? Text('No orders right now')
-                  : Column(
-                      children: curr,
-                    ),
-            ))
-          ],
-        ),
+          ),
+          SizedBox(
+            height: height * 0.02,
+          ),
+          Container(
+              alignment: curr.isEmpty ? Alignment.center : Alignment.topCenter,
+              height: height * 0.79,
+              child: SingleChildScrollView(
+                child: curr.isEmpty
+                    ? Text(
+                        'No pending orders',
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w300,
+                            fontSize: 24),
+                      )
+                    : Column(
+                        children: curr,
+                      ),
+              ))
+        ],
       ),
     );
   }

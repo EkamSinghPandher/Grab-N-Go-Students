@@ -14,21 +14,25 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     List<Order> orders = Provider.of<List<Order>>(context);
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     List<HistoryTile> history = orders == null
         ? []
         : orders
             .where((element) => element.isCollected == true)
             .toList()
             .map((e) => HistoryTile(
+                  height: height * 0.28,
                   order: e,
+                  width: width,
                 ))
             .toList();
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(height: 45),
-          Padding(
-            padding: const EdgeInsets.all(14.0),
+          Container(
+            alignment: Alignment.bottomCenter,
+            height: height * 0.1,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -58,11 +62,22 @@ class _HistoryScreenState extends State<HistoryScreen> {
               ],
             ),
           ),
+          SizedBox(
+            height: height * 0.02,
+          ),
           Container(
-              height: 100,
-              alignment: Alignment.center,
+              height: height * 0.79,
+              alignment:
+                  history.isEmpty ? Alignment.center : Alignment.topCenter,
               child: history.isEmpty
-                  ? Text('No History')
+                  ? Text(
+                      'No order history',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w300,
+                          fontSize: 24),
+                    )
                   : SingleChildScrollView(child: Column(children: history))),
         ],
       ),

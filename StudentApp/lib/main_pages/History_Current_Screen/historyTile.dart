@@ -6,36 +6,78 @@ import 'package:provider/provider.dart';
 
 class HistoryTile extends StatelessWidget {
   final Order order;
+  final double height;
+  final double width;
 
-  HistoryTile({this.order});
-
+  const HistoryTile({Key key, this.order, this.height, this.width})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
-    List<Vendor> vendors = Provider.of<List<Vendor>>(context);
-    return Card(
-      color: Colors.blueGrey,
-      child: Row(
-        children: [
+    return Container(
+      height: height,
+      width: width,
+      child: Column(
+        children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-            width: 85,
-            height: 80,
-            padding: EdgeInsets.all(3),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: Image.network(vendors
-                    .firstWhere((element) => element.uid == order.vendorUID)
-                    .stallImage)),
+            height: height * 0.8,
+            width: width * 0.9,
+            child: Row(
+              children: <Widget>[
+                Container(
+                  height: height * 0.60,
+                  width: width * 0.28,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(7),
+                    child: Image.network(
+                      order.orderImage,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 2, 0, 2),
+                  height: height * 0.6,
+                  width: width * 0.38,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Order: ${order.orderID}",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontFamily: "Montserrat",
+                              fontWeight: FontWeight.w600)),
+                      Text(
+                        "x${order.quantity.toString()} ${order.foodName}",
+                        style: TextStyle(
+                            fontSize: 11,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w300),
+                      ),
+                      Text(
+                          "Cost: \$${(order.foodPrice / 100).toStringAsFixed(2)}",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: "Montserrat",
+                              fontWeight: FontWeight.w400)),
+                      Text(
+                          "Time: ${DateFormat('HH:mm').format(order.dateTime)}",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: "Montserrat",
+                              fontWeight: FontWeight.w400))
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(vendors
-                  .firstWhere((element) => element.uid == order.vendorUID)
-                  .stallName),
-              Text(DateFormat("dd-MM-yyyy HH:mm").format(order.dateTime)),
-            ],
-          ),
+          Divider(
+            color: Colors.black,
+            endIndent: 22,
+            indent: 22,
+            thickness: 0.7,
+          )
         ],
       ),
     );

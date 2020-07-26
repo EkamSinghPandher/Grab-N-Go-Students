@@ -157,12 +157,12 @@ class DataService {
                 stock: (food.stock - quantity),
                 uid: food.uid)
             .toJson());
-    await vendorsCollection
+    vendorsCollection
         .document(vendor.uid)
         .collection('Orders')
         .document(orderID)
         .setData(newOrder.toJson());
-    await studentsCollection
+    studentsCollection
         .document(uid)
         .collection('Orders')
         .document(orderID)
@@ -188,14 +188,14 @@ class DataService {
   //send message
   Future sendMessage(Order order, Message message) async {
     await studentsCollection
-        .document(order.vendorUID)
+        .document(order.studentUID)
         .collection('Orders')
         .document(order.orderID)
         .collection("Messages")
         .document(message.time.toIso8601String())
         .setData(message.toJson());
     vendorsCollection
-        .document(order.studentUID)
+        .document(order.vendorUID)
         .collection('Orders')
         .document(order.orderID)
         .collection("Messages")
