@@ -44,7 +44,6 @@ class _PurchaseFoodState extends State<PurchaseFood> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     //Payment payment = Payment.initialize();
     return Container(
       color: Color(0xff757575),

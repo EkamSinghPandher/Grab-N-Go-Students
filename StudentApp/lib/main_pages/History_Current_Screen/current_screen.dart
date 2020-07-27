@@ -28,56 +28,59 @@ class _CurrentScreenState extends State<CurrentScreen> {
             ))
         .toList();
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.bottomCenter,
-            height: height * 0.1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    "HISTORY",
-                    style: TextStyle(
-                      fontSize: 18.0,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.bottomCenter,
+              height: height * 0.1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "HISTORY",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
                     ),
                   ),
-                ),
-                Text(
-                  "CURRENT",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    "CURRENT",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: height * 0.02,
-          ),
-          Container(
-              alignment: curr.isEmpty ? Alignment.center : Alignment.topCenter,
-              height: height * 0.79,
-              child: SingleChildScrollView(
-                child: curr.isEmpty
-                    ? Text(
-                        'No pending orders',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w300,
-                            fontSize: 24),
-                      )
-                    : Column(
-                        children: curr,
-                      ),
-              ))
-        ],
+            SizedBox(
+              height: height * 0.02,
+            ),
+            Container(
+                alignment:
+                    curr.isEmpty ? Alignment.center : Alignment.topCenter,
+                height: height * 0.79,
+                child: SingleChildScrollView(
+                  child: curr.isEmpty
+                      ? Text(
+                          'No pending orders',
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w300,
+                              fontSize: 24),
+                        )
+                      : Column(
+                          children: curr,
+                        ),
+                ))
+          ],
+        ),
       ),
     );
   }

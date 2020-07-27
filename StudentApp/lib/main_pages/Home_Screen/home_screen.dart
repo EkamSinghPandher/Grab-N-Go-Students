@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int current = 0;
   final Firestore db = Firestore.instance;
   final FirebaseMessaging fcm = FirebaseMessaging();
+  // ignore: cancel_subscriptions
   StreamSubscription iosSubscription;
 
   @override
