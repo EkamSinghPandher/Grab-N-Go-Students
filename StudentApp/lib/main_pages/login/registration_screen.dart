@@ -86,7 +86,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 ),
                                 icon: Icon(
                                   Icons.mail_outline,
-                                  size: 30,
                                 ),
                                 height: height,
                                 width: width,
@@ -106,7 +105,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 ),
                                 icon: Icon(
                                   Icons.lock_outline,
-                                  size: 30,
                                 ),
                                 height: height,
                                 width: width,

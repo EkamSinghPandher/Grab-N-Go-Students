@@ -1,8 +1,6 @@
 import 'package:StudentApp/Models/Order.dart';
-import 'package:StudentApp/Models/Vendor.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class HistoryTile extends StatelessWidget {
   final Order order;

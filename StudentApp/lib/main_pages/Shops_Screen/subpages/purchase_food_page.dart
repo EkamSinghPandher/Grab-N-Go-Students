@@ -1,11 +1,9 @@
 import 'package:StudentApp/Models/Food.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/Services/database.dart';
-import 'package:StudentApp/Services/payment.dart';
 import 'package:StudentApp/main_pages/page_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:stripe_payment/stripe_payment.dart';
 
 class PurchaseFood extends StatefulWidget {
   final Food food;
@@ -24,10 +22,30 @@ class PurchaseFood extends StatefulWidget {
 
 class _PurchaseFoodState extends State<PurchaseFood> {
   int quantity = 1;
+  TimeOfDay timeNow = TimeOfDay.now();
+  TimeOfDay timePicked;
+  TimeOfDay validTime;
+  String errorMsg;
+
+  Future<Null> selectTime(BuildContext context) async {
+    timePicked = await showTimePicker(
+        context: context, initialTime: validTime == null ? timeNow : validTime);
+    setState(() {
+      if ((timePicked.hour < timeNow.hour) ||
+          (timePicked.hour == timeNow.hour &&
+              timePicked.minute < (timeNow.minute + 15))) {
+        errorMsg = 'Choose a valid time';
+        validTime = null;
+      } else {
+        validTime = timePicked;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    Payment payment = Payment.initialize();
+    double width = MediaQuery.of(context).size.width;
+    //Payment payment = Payment.initialize();
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -116,14 +134,22 @@ class _PurchaseFoodState extends State<PurchaseFood> {
               ),
             ),
             FlatButton(
+              child: Row(
+                children: <Widget>[Icon(Icons.alarm), Text('Collect at')],
+              ),
+              onPressed: () async {
+                await selectTime(context);
+              },
+            ),
+            /*FlatButton(
               child: Text(
                 'Add or change Card',
                 style: TextStyle(fontSize: 15.0, color: Colors.lightBlueAccent),
               ),
               onPressed: () {
-                payment.addCard();
+                //payment.addCard();
               },
-            ),
+            ),*/
             FlatButton(
               child: Text(
                 'CONFIRM',
@@ -133,12 +159,24 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                 ),
               ),
               onPressed: () {
-                DataService(uid: widget.studentID).orderFood(
-                    widget.food, quantity, DateTime.now(), widget.vendor);
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => PageLogic()),
-                    ModalRoute.withName(PageLogic.id));
+                if (validTime != null) {
+                  DataService(uid: widget.studentID).orderFood(
+                      widget.food,
+                      quantity,
+                      DateTime(DateTime.now().year, DateTime.now().month,
+                          DateTime.now().day, validTime.hour, validTime.minute),
+                      widget.vendor);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => PageLogic()),
+                      ModalRoute.withName(PageLogic.id));
+                } else {
+                  setState(() {
+                    if (errorMsg == null) {
+                      errorMsg = 'Please Choose a time for your order';
+                    }
+                  });
+                }
               },
             ),
           ],
@@ -146,21 +184,6 @@ class _PurchaseFoodState extends State<PurchaseFood> {
       ),
     );
   }
-/*
-  _squarePayment() async {
-    await InAppPayments.setSquareApplicationId('sq0idp-_pqcBeHgzPTL6DeEFmUCwQ');
-    await InAppPayments.startCardEntryFlow(
-        onCardNonceRequestSuccess: (CardDetails result) {
-          try {
-            InAppPayments.completeCardEntry(
-                onCardEntryComplete: () => print('yay'));
-          } on Exception catch (ex) {
-            print('problem');
-            InAppPayments.showCardNonceProcessingError(ex.toString());
-          }
-        },
-        onCardEntryCancel: () {});
-  }*/
 }
 
 class ReusableCard extends StatelessWidget {

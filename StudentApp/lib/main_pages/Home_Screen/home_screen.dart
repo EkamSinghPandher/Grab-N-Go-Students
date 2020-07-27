@@ -1,5 +1,10 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:StudentApp/main_pages/Home_Screen/home_background.dart';
 import 'package:StudentApp/Models/Student.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:provider/provider.dart';
 
 import 'carousell.dart';
@@ -14,8 +19,61 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int current = 0;
+  final Firestore db = Firestore.instance;
+  final FirebaseMessaging fcm = FirebaseMessaging();
+  StreamSubscription iosSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isIOS) {
+      iosSubscription = fcm.onIosSettingsRegistered.listen((event) {});
+      fcm.requestNotificationPermissions(IosNotificationSettings());
+    }
+
+    fcm.configure(
+      // ignore: missing_return
+      onMessage: (Map<String, dynamic> message) {
+        print("onMessage: $message");
+
+        final snackbar = SnackBar(
+          content: Text(message['notification']['title']),
+          action: SnackBarAction(
+            onPressed: () {},
+            label: 'Go',
+          ),
+        );
+        Scaffold.of(context).showSnackBar(snackbar);
+      },
+      // ignore: missing_return
+      onLaunch: (Map<String, dynamic> message) {
+        print("onLaunch: $message");
+      },
+    );
+  }
+
+  saveDeviceToken(String uid) async {
+    if (uid != null) {
+      String fcmToken = await fcm.getToken();
+      if (fcmToken != null) {
+        var tokenref = db
+            .collection('Students')
+            .document(uid)
+            .collection('Tokens')
+            .document(fcmToken);
+
+        await tokenref.setData({
+          'token': fcmToken,
+          'createdAt': FieldValue.serverTimestamp(),
+          'platform': Platform.operatingSystem
+        });
+      }
+    }
+  }
+
   Widget build(BuildContext context) {
     Student stud = Provider.of<Student>(context);
+    saveDeviceToken(Provider.of<Student>(context).uid);
     return stud == null
         ? CircularProgressIndicator()
         : Scaffold(

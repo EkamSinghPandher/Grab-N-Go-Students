@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+/*import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 import 'package:flutter/material.dart';
@@ -20,3 +20,4 @@ class Payment with ChangeNotifier {
     }).catchError((onError) => print('payment error'));
   }
 }
+*/
