@@ -20,28 +20,43 @@ class _ShopScreenState extends State<ShopScreen> {
     return stud == null
         ? CircularProgressIndicator()
         : Scaffold(
-            appBar: topBar(
-              context,
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.black,
-                  size: 30,
-                ),
-                onPressed: () {
-                  showSearch(context: context, delegate: DataSearch(stud.uid));
-                },
-              ),
-              "Locations",
-            ),
             body: CustomPaint(
               painter: ShopBackground(),
               child: SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Locations",
+                            style: TextStyle(
+                              color: Colors.blue.shade800,
+                              fontFamily: 'Montserrat',
+                              fontSize: 30.0,
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.search,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              showSearch(
+                                  context: context,
+                                  delegate: DataSearch(stud.uid));
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.8,
+                      height: MediaQuery.of(context).size.height * 0.75,
                       child: LocationsList(studentID: stud.uid),
                     )
                   ],
