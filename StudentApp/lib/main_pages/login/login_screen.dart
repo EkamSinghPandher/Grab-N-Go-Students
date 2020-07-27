@@ -1,6 +1,7 @@
 import 'package:StudentApp/Services/auth.dart';
 import 'package:StudentApp/components/constants.dart';
 import 'package:StudentApp/components/roundedButton.dart';
+import 'package:StudentApp/main_pages/login/loading_screen.dart';
 import 'package:StudentApp/main_pages/login/registration_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -29,13 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: isLoading
-          ? Center(
-              child: Container(
-                  height: 400,
-                  width: 200,
-                  child: Dialog(
-                    child: CircularProgressIndicator(),
-                  )))
+          ? LoadingScreen()
           : SingleChildScrollView(
               child: Form(
                 key: formKey,
