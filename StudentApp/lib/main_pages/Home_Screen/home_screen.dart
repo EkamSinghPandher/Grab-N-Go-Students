@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:StudentApp/main_pages/Home_Screen/home_background.dart';
 import 'package:StudentApp/Models/Student.dart';
+import 'package:StudentApp/main_pages/login/loading_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:provider/provider.dart';
@@ -74,9 +75,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget build(BuildContext context) {
     Student stud = Provider.of<Student>(context);
-    saveDeviceToken(Provider.of<Student>(context).uid);
+    saveDeviceToken(Provider.of<Student>(context) == null
+        ? null
+        : Provider.of<Student>(context).uid);
     return stud == null
-        ? CircularProgressIndicator()
+        ? LoadingScreen()
         : Scaffold(
             body: CustomPaint(
               painter: HomeBackground(),
@@ -125,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     HorizontalList(
-                      studentID: stud.uid,
+                      student: stud,
                     ),
                   ],
                 ),

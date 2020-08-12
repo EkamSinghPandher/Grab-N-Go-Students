@@ -1,3 +1,5 @@
+import 'package:StudentApp/Models/Student.dart';
+
 import './subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
@@ -7,14 +9,14 @@ class LocationCard extends StatelessWidget {
   final String imageLocation;
   final String locationName;
 
-  final String studentID;
+  final Student student;
 
   LocationCard(
       {this.imageLocation,
       this.locationName,
       this.width,
       this.height,
-      @required this.studentID});
+      @required this.student});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class LocationCard extends StatelessWidget {
           new MaterialPageRoute(
             builder: (context) => new StallPage(
               location: locationName,
-              studentID: studentID,
+              student: student,
             ),
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Message.g.dart';
@@ -9,8 +10,12 @@ class Message {
   final String vendorID;
   final String sendorID;
   final DateTime time;
+  final String studName;
+  final String stallName;
 
   Message({
+    @required this.studName,
+    this.stallName,
     this.time,
     this.text,
     this.studentID,

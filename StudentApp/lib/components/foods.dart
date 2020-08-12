@@ -1,3 +1,4 @@
+import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/subpages/purchase_food_page.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,9 @@ class Food extends StatelessWidget {
   final List<fd.Food> foodList;
   final Vendor vendor;
 
-  final String studentID;
+  final Student student;
 
-  const Food({this.foodList, @required this.vendor, @required this.studentID});
+  const Food({this.foodList, @required this.vendor, @required this.student});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class Food extends StatelessWidget {
           new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (BuildContext context, int index) {
         return SingleFood(
-          studentID: studentID,
+          student: student,
           food: foodList[index],
           name: foodMap[index]['name'],
           picture: foodMap[index]['picture'],
@@ -41,7 +42,7 @@ class SingleFood extends StatelessWidget {
   final name;
   final picture;
   final price;
-  final String studentID;
+  final Student student;
 
   SingleFood(
       {this.name,
@@ -49,7 +50,7 @@ class SingleFood extends StatelessWidget {
       this.price,
       this.vendor,
       this.food,
-      this.studentID});
+      this.student});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,7 @@ class SingleFood extends StatelessWidget {
                     child: PurchaseFood(
                       vendor: vendor,
                       food: food,
-                      studentID: studentID,
+                      student: student,
                     ),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:StudentApp/Models/Food.dart';
+import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/components/foods.dart' as fc;
 import 'package:flutter/material.dart';
@@ -7,9 +8,9 @@ class FoodPage extends StatelessWidget {
   final Vendor shop;
   final List<Food> menu;
 
-  final String studentID;
+  final Student student;
 
-  FoodPage({this.shop, this.menu, @required this.studentID});
+  FoodPage({this.shop, this.menu, @required this.student});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +62,7 @@ class FoodPage extends StatelessWidget {
               child: fc.Food(
                 vendor: shop,
                 foodList: menu,
-                studentID: studentID,
+                student: student,
               ),
             ),
           ],

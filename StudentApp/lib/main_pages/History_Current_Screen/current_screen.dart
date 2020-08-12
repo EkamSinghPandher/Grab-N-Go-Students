@@ -1,12 +1,15 @@
 import 'package:StudentApp/Models/Order.dart';
+import 'package:provider/provider.dart';
 
 import 'chatTile.dart';
 import 'package:flutter/material.dart';
 
-class CurrentScreen extends StatefulWidget {
-  final List<Order> orderList;
+import 'history_screen.dart';
 
-  const CurrentScreen({Key key, this.orderList}) : super(key: key);
+class CurrentScreen extends StatefulWidget {
+  const CurrentScreen({
+    Key key,
+  }) : super(key: key);
   @override
   _CurrentScreenState createState() => _CurrentScreenState();
 }
@@ -16,17 +19,20 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<Order> orderList = Provider.of<List<Order>>(context);
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-    List<ChatTile> curr = widget.orderList
-        .where((element) => element.isCollected == false)
-        .toList()
-        .map((e) => ChatTile(
-              height: height * 0.28,
-              width: width,
-              order: e,
-            ))
-        .toList();
+    List<ChatTile> curr = orderList == null
+        ? []
+        : orderList
+            .where((element) => element.isCollected == false)
+            .toList()
+            .map((e) => ChatTile(
+                  height: height * 0.28,
+                  width: width,
+                  order: e,
+                ))
+            .toList();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -39,7 +45,10 @@ class _CurrentScreenState extends State<CurrentScreen> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.of(context).push(new MaterialPageRoute(
+                          builder: (context) => new HistoryScreen(
+                                orders: orderList,
+                              )));
                     },
                     child: Text(
                       "HISTORY",

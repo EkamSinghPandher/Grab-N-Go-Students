@@ -1,12 +1,13 @@
 import 'package:StudentApp/Models/LocationList.dart';
+import 'package:StudentApp/Models/Student.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'LocationCard.dart';
 
 class LocationsList extends StatefulWidget {
-  final String studentID;
+  final Student student;
 
-  const LocationsList({Key key, this.studentID}) : super(key: key);
+  const LocationsList({Key key, @required this.student}) : super(key: key);
   @override
   _LocationsListState createState() => _LocationsListState();
 }
@@ -20,7 +21,7 @@ class _LocationsListState extends State<LocationsList> {
           scrollDirection: Axis.vertical,
           children: locations
               .map((e) => LocationCard(
-                    studentID: widget.studentID,
+                    student: widget.student,
                     imageLocation: e.imageURL,
                     locationName: e.name,
                     width: 180,

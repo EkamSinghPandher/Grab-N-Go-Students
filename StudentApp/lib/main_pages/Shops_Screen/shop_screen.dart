@@ -1,6 +1,5 @@
 import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/shops_background.dart';
-import 'package:StudentApp/main_pages/appBar.dart';
 import 'package:provider/provider.dart';
 
 import 'dataSearch.dart';
@@ -48,8 +47,7 @@ class _ShopScreenState extends State<ShopScreen> {
                             ),
                             onPressed: () {
                               showSearch(
-                                  context: context,
-                                  delegate: DataSearch(stud.uid));
+                                  context: context, delegate: DataSearch(stud));
                             },
                           ),
                         ],
@@ -57,7 +55,7 @@ class _ShopScreenState extends State<ShopScreen> {
                     ),
                     Container(
                       height: MediaQuery.of(context).size.height * 0.75,
-                      child: LocationsList(studentID: stud.uid),
+                      child: LocationsList(student: stud),
                     )
                   ],
                 ),

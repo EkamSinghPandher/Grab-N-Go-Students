@@ -1,6 +1,9 @@
 import 'package:StudentApp/Services/auth.dart';
 import 'package:StudentApp/components/constants.dart';
 import 'package:StudentApp/components/roundedButton.dart';
+import 'package:StudentApp/main_pages/login/loading_screen.dart';
+import 'package:fancy_dialog/FancyGif.dart';
+import 'package:fancy_dialog/fancy_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'TextInput.dart';
@@ -19,7 +22,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String email = '';
   String password = '';
   String errorMsg = '';
-  String stallName = '';
+  String name = '';
   bool isLoading = false;
   String dropdownvalue = "Deck";
   @override
@@ -29,13 +32,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: isLoading
-            ? Center(
-                child: Container(
-                    height: 400,
-                    width: 200,
-                    child: Dialog(
-                      child: CircularProgressIndicator(),
-                    )))
+            ? LoadingScreen()
             : SingleChildScrollView(
                 child: Form(
                   key: formKey,
@@ -93,6 +90,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               SizedBox(height: 15),
                               TextInput(
                                 field: TextFormField(
+                                  onChanged: (value) {
+                                    setState(() {
+                                      name = value;
+                                    });
+                                  },
+                                  decoration: kTextFieldDecoration.copyWith(
+                                    hintText: 'Enter Your Name',
+                                  ),
+                                ),
+                                icon: Icon(
+                                  Icons.mail_outline,
+                                ),
+                                height: height,
+                                width: width,
+                              ),
+                              SizedBox(height: 15),
+                              TextInput(
+                                field: TextFormField(
                                   obscureText: true,
                                   onChanged: (value) {
                                     setState(() {
@@ -131,9 +146,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     isLoading = true;
                                   });
                                   dynamic result = await _auth.registerUser(
-                                    email,
-                                    password,
-                                  );
+                                      email, password, name);
                                   if (result == null) {
                                     setState(() {
                                       isLoading = false;
@@ -144,6 +157,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     setState(() {
                                       isLoading = false;
                                     });
+                                    await buildShowDialog(context);
                                     Navigator.of(context)
                                         .pushReplacementNamed(LoginScreen.id);
                                   }
@@ -153,5 +167,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ]),
                 ),
               ));
+  }
+
+  buildShowDialog(BuildContext context) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) => FancyDialog(
+              descreption: 'Please verify your email by clicking the link sent',
+              gifPath: FancyGif.CHECK_MAIL,
+              title: '',
+            ));
   }
 }

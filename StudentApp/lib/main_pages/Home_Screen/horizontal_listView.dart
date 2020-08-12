@@ -1,15 +1,16 @@
 import 'dart:math';
 
 import 'package:StudentApp/Models/LocationList.dart';
+import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/main_pages/Home_Screen/near_you_locations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
 
 class HorizontalList extends StatefulWidget {
-  final String studentID;
+  final Student student;
 
-  const HorizontalList({Key key, this.studentID}) : super(key: key);
+  const HorizontalList({Key key, @required this.student}) : super(key: key);
   @override
   _HorizontalListState createState() => _HorizontalListState();
 }
@@ -62,7 +63,7 @@ class _HorizontalListState extends State<HorizontalList> {
               children: geoSort(locations)
                   .map(
                     (e) => NearLocations(
-                      studentID: widget.studentID,
+                      student: widget.student,
                       imageLocation: e.imageURL,
                       locationName: e.name,
                       width: 160,

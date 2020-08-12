@@ -2,12 +2,13 @@ import 'package:StudentApp/Models/Order.dart';
 import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/User.dart';
 import 'package:StudentApp/Services/database.dart';
-import 'package:StudentApp/main_pages/History_Current_Screen/history_screen.dart';
 import 'package:StudentApp/main_pages/Home_Screen/home_screen.dart';
 import 'package:StudentApp/main_pages/Profile_Screen/profile_screen.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/shop_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'History_Current_Screen/current_screen.dart';
 
 class PageLogic extends StatefulWidget {
   static const String id = 'page_logic';
@@ -20,7 +21,7 @@ class _PageLogicState extends State<PageLogic> {
   final List<Widget> _children = [
     HomeScreen(),
     ShopScreen(),
-    HistoryScreen(),
+    CurrentScreen(),
     ProfileScreen(),
   ];
 
@@ -31,7 +32,7 @@ class _PageLogicState extends State<PageLogic> {
       create: (_) => DataService(uid: user.uid).students,
       child: StreamProvider<List<Order>>(
         create: (_) => DataService(uid: user.uid).myOrders,
-              child: Scaffold(
+        child: Scaffold(
           body: _children[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _currentIndex,
@@ -47,7 +48,7 @@ class _PageLogicState extends State<PageLogic> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.speaker_notes),
-                title: Text('History'),
+                title: Text('Orders'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),

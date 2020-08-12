@@ -1,4 +1,5 @@
 import 'package:StudentApp/Models/LocationList.dart';
+import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/subpages/singleStall.dart';
 import 'package:provider/provider.dart';
@@ -7,10 +8,10 @@ import './subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate<String> {
-  final String studentID;
+  final Student student;
   final recentLocations = [];
 
-  DataSearch(this.studentID);
+  DataSearch(this.student);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -46,7 +47,7 @@ class DataSearch extends SearchDelegate<String> {
         new MaterialPageRoute(
           builder: (context) => new StallPage(
             location: query,
-            studentID: studentID,
+            student: student,
           ),
         ),
       ),
@@ -71,10 +72,10 @@ class DataSearch extends SearchDelegate<String> {
           builder: (context) => location.contains(suggestionList[index])
               ? StallPage(
                   location: suggestionList[index],
-                  studentID: studentID,
+                  student: student,
                 )
               : SingleStall(
-                  studentID: studentID,
+                  student: student,
                   shop: vendorList.firstWhere(
                       (element) => element.stallName == suggestionList[index])),
         )),

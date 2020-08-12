@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Order.g.dart';
@@ -6,6 +7,8 @@ part 'Order.g.dart';
 class Order {
   final String vendorUID;
   final String studentUID;
+  final String studName;
+  final String stallName;
   final DateTime dateTime;
   final String foodName;
   final String orderID;
@@ -16,7 +19,9 @@ class Order {
   final String orderImage;
 
   Order(
-      {this.orderImage,
+      {@required this.studName,
+      this.stallName,
+      this.orderImage,
       this.vendorUID,
       this.studentUID,
       this.dateTime,

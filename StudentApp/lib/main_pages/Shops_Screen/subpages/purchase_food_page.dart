@@ -1,4 +1,5 @@
 import 'package:StudentApp/Models/Food.dart';
+import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/Services/database.dart';
 import 'package:StudentApp/main_pages/page_logic.dart';
@@ -8,13 +9,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class PurchaseFood extends StatefulWidget {
   final Food food;
   final Vendor vendor;
-  final String studentID;
+  final Student student;
 
   const PurchaseFood(
       {Key key,
       @required this.food,
       @required this.vendor,
-      @required this.studentID})
+      @required this.student})
       : super(key: key);
   @override
   _PurchaseFoodState createState() => _PurchaseFoodState();
@@ -35,6 +36,14 @@ class _PurchaseFoodState extends State<PurchaseFood> {
           (timePicked.hour == timeNow.hour &&
               timePicked.minute < (timeNow.minute + 15))) {
         errorMsg = 'Choose a valid time';
+        validTime = null;
+      } else if ((timePicked.hour < widget.vendor.openingHour.hour ||
+              (timePicked.hour == widget.vendor.openingHour.hour &&
+                  timePicked.minute < widget.vendor.openingHour.minute)) ||
+          (timePicked.hour > widget.vendor.closingHour.hour ||
+              (timePicked.hour == widget.vendor.closingHour.hour &&
+                  timePicked.minute > widget.vendor.closingHour.minute))) {
+        errorMsg = 'The vendor is not open at the specified time';
         validTime = null;
       } else {
         validTime = timePicked;
@@ -140,6 +149,12 @@ class _PurchaseFoodState extends State<PurchaseFood> {
                 await selectTime(context);
               },
             ),
+            errorMsg == null
+                ? SizedBox(height: 12)
+                : Text(
+                    errorMsg,
+                    style: TextStyle(color: Colors.red),
+                  ),
             /*FlatButton(
               child: Text(
                 'Add or change Card',
@@ -159,12 +174,13 @@ class _PurchaseFoodState extends State<PurchaseFood> {
               ),
               onPressed: () {
                 if (validTime != null) {
-                  DataService(uid: widget.studentID).orderFood(
+                  DataService().orderFood(
                       widget.food,
                       quantity,
                       DateTime(DateTime.now().year, DateTime.now().month,
                           DateTime.now().day, validTime.hour, validTime.minute),
-                      widget.vendor);
+                      widget.vendor,
+                      widget.student);
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => PageLogic()),

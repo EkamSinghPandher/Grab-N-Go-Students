@@ -1,3 +1,4 @@
+import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/subpages/stall_page.dart';
 import 'package:flutter/material.dart';
 
@@ -7,14 +8,14 @@ class NearLocations extends StatelessWidget {
   final String imageLocation;
   final String locationName;
 
-  final String studentID;
+  final Student student;
 
   NearLocations(
       {this.imageLocation,
       this.locationName,
       this.width,
       this.height,
-      @required this.studentID});
+      @required this.student});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class NearLocations extends StatelessWidget {
           new MaterialPageRoute(
             builder: (context) => new StallPage(
               location: locationName,
-              studentID: studentID,
+              student: student,
             ),
           ),
         ),

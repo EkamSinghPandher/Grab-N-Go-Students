@@ -3,14 +3,16 @@ import 'package:json_annotation/json_annotation.dart';
 part 'Student.g.dart';
 
 @JsonSerializable()
-class Student{
+class Student {
   final String uid;
   final String email;
+  final String name;
   //geolocation
   final String currLoc;
 
-  Student({this.uid, this.email, this.currLoc});
+  Student({this.name, this.uid, this.email, this.currLoc});
 
-  factory Student.fromJson(Map<String, dynamic> json) =>_$StudentFromJson(json);
+  factory Student.fromJson(Map<String, dynamic> json) =>
+      _$StudentFromJson(json);
   Map<String, dynamic> toJson() => _$StudentToJson(this);
 }

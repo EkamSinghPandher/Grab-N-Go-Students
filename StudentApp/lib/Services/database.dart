@@ -115,18 +115,16 @@ class DataService {
     return snapshot.documents.map((e) => Order.fromJson(e.data)).toList();
   }
 
-  Future orderFood(
-    Food food,
-    int quantity,
-    DateTime dateTime,
-    Vendor vendor,
-  ) async {
+  Future orderFood(Food food, int quantity, DateTime dateTime, Vendor vendor,
+      Student student) async {
     String orderID = Random(DateTime.now().hashCode).nextInt(999999).toString();
     Order newOrder = Order(
         orderImage: food.foodImage,
         dateTime: dateTime,
         vendorUID: vendor.uid,
-        studentUID: uid,
+        studentUID: student.uid,
+        stallName: vendor.stallName,
+        studName: student.name,
         foodName: food.foodName,
         foodPrice: food.foodPrice,
         quantity: quantity,
@@ -163,10 +161,21 @@ class DataService {
         .document(orderID)
         .setData(newOrder.toJson());
     studentsCollection
-        .document(uid)
+        .document(student.uid)
         .collection('Orders')
         .document(orderID)
         .setData(newOrder.toJson());
+    sendMessage(
+        newOrder,
+        Message(
+            studName: newOrder.studName,
+            stallName: newOrder.stallName,
+            time: DateTime.now(),
+            studentID: newOrder.studentUID,
+            vendorID: newOrder.vendorUID,
+            sendorID: newOrder.vendorUID,
+            text:
+                'Your order has been recieved and your order number is ${newOrder.orderID.toString()}, please check your current orders for more details'));
   }
 
   //Get Stream of messages from an order

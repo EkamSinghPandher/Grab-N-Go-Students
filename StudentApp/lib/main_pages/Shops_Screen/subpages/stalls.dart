@@ -1,12 +1,13 @@
+import 'package:StudentApp/Models/Student.dart';
 import 'package:StudentApp/Models/Vendor.dart';
 import 'package:StudentApp/main_pages/Shops_Screen/subpages/singleStall.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Stalls extends StatelessWidget {
-  final String studentID;
+  final Student student;
 
-  const Stalls({Key key, @required this.studentID}) : super(key: key);
+  const Stalls({Key key, @required this.student}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class Stalls extends StatelessWidget {
           new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (BuildContext context, int index) {
         return SingleStall(
-          studentID: studentID,
+          student: student,
           shop: stallList[index],
         );
       },
