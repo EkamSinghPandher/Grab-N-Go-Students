@@ -22,14 +22,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 50.0,
-                    ),
                     SizedBox(
                       width: 150,
-                      height: 20.0,
-                      child: Divider(
-                        color: Colors.blue.shade200,
+                      height: 30.0,
+                    ),
+                    Text(
+                      student.name,
+                      style: TextStyle(
+                        color: Colors.blue.shade800,
+                        fontFamily: "Montserrat",
+                        fontSize: 25.0,
                       ),
                     ),
                     Card(
@@ -44,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           student.email,
                           style: TextStyle(
                             fontFamily: 'SourceSansPro',
-                            fontSize: 19.0,
+                            fontSize: 16.0,
                             color: Colors.blue.shade700,
                             letterSpacing: 1.0,
                           ),

@@ -311,6 +311,8 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 6.5)
     - Protobuf (>= 3.9.2, ~> 3.9)
   - Flutter (1.0.0)
+  - flutter_local_notifications (0.0.1):
+    - Flutter
   - "geolocator (5.3.2+2)":
     - Flutter
   - google_api_availability (2.0.4):
@@ -391,6 +393,7 @@ DEPENDENCIES:
   - firebase_core_web (from `.symlinks/plugins/firebase_core_web/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - geolocator (from `.symlinks/plugins/geolocator/ios`)
   - google_api_availability (from `.symlinks/plugins/google_api_availability/ios`)
   - location_permissions (from `.symlinks/plugins/location_permissions/ios`)
@@ -438,6 +441,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_messaging/ios"
   Flutter:
     :path: Flutter
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   geolocator:
     :path: ".symlinks/plugins/geolocator/ios"
   google_api_availability:
@@ -468,6 +473,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: cef67c4967c7cecb56ea65d8acbb4834825c587b
   FirebaseMessaging: 29543feb343b09546ab3aa04d008ee8595b43c44
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_local_notifications: 9e4738ce2471c5af910d961a6b7eadcf57c50186
   geolocator: f7622e0e7e2a24718285b73916d60c4a54b9f5b6
   google_api_availability: 15fa42a8cd83c0a6738507ffe6e87096f12abcb8
   GoogleAppMeasurement: 67458367830514fb20fd9e233496f1eef9d90185
