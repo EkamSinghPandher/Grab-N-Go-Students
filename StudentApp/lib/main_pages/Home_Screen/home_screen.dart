@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       // ignore: missing_return
       onLaunch: (Map<String, dynamic> message) {
-        print("onLaunch: $message");
+        print("onLaunch : $message");
       },
     );
   }

@@ -18,6 +18,7 @@ class _LocationsListState extends State<LocationsList> {
     List<Location> locations = Provider.of<List<Location>>(context);
     return Container(
       child: ListView(
+          physics: BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
           children: locations
               .map((e) => LocationCard(

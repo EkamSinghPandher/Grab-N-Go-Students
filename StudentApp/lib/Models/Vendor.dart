@@ -24,11 +24,11 @@ class Vendor {
       this.openingHour,
       this.closingHour});
 
-  static double timeOfDayToDouble(TimeOfDay time) {
+  static num timeOfDayToDouble(TimeOfDay time) {
     return time.hour + time.minute / 60;
   }
 
-  static TimeOfDay doubleToTimeOfDay(double doub) {
+  static TimeOfDay doubleToTimeOfDay(num doub) {
     return TimeOfDay(
         hour: (doub - (doub % 1)).floor(), minute: ((doub % 1) * 60).floor());
   }

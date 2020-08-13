@@ -47,6 +47,7 @@ class _PurchaseFoodState extends State<PurchaseFood> {
         validTime = null;
       } else {
         validTime = timePicked;
+        errorMsg = null;
       }
     });
   }
@@ -142,8 +143,18 @@ class _PurchaseFoodState extends State<PurchaseFood> {
               ),
             ),
             FlatButton(
-              child: Row(
-                children: <Widget>[Icon(Icons.alarm), Text('Collect at')],
+              child: Container(
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.alarm),
+                    SizedBox(width: 10),
+                    Text(validTime == null
+                        ? 'Collect at ${TimeOfDay.now().hour.toString()}:${TimeOfDay.now().minute.toString()}'
+                        : 'Collect at ${validTime.hour.toString()}:${validTime.minute.toString()}')
+                  ],
+                ),
               ),
               onPressed: () async {
                 await selectTime(context);
@@ -151,9 +162,12 @@ class _PurchaseFoodState extends State<PurchaseFood> {
             ),
             errorMsg == null
                 ? SizedBox(height: 12)
-                : Text(
-                    errorMsg,
-                    style: TextStyle(color: Colors.red),
+                : Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      errorMsg,
+                      style: TextStyle(color: Colors.red),
+                    ),
                   ),
             /*FlatButton(
               child: Text(

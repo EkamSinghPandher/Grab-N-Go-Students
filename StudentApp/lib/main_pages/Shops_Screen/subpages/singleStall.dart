@@ -15,6 +15,10 @@ class SingleStall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TimeOfDay timeNow = TimeOfDay.now();
+    print(timeNow);
+    print(shop.closingHour);
+    print(shop.openingHour);
     return StreamProvider<List<Food>>(
       create: (_) => DataService().menuFromLocation(shop, shop.loc),
       child: Container(
@@ -22,15 +26,22 @@ class SingleStall extends StatelessWidget {
           child: Material(
             child: Consumer<List<Food>>(
               builder: (context, provider, child) => InkWell(
-                onTap: () => Navigator.of(context).push(
-                  new MaterialPageRoute(
-                    builder: (_) => new FoodPage(
-                      shop: shop,
-                      menu: provider,
-                      student: student,
-                    ),
-                  ),
-                ),
+                onTap: () => (timeNow.hour > shop.closingHour.hour ||
+                        timeNow.hour < shop.openingHour.hour ||
+                        (timeNow.hour == shop.closingHour.hour &&
+                            timeNow.minute > shop.closingHour.minute) ||
+                        (timeNow.hour == shop.openingHour.hour &&
+                            timeNow.minute > shop.openingHour.minute))
+                    ? null
+                    : Navigator.of(context).push(
+                        new MaterialPageRoute(
+                          builder: (_) => new FoodPage(
+                            shop: shop,
+                            menu: provider,
+                            student: student,
+                          ),
+                        ),
+                      ),
                 child: GridTile(
                   footer: Container(
                     color: Colors.white70,
@@ -41,10 +52,34 @@ class SingleStall extends StatelessWidget {
                       ),
                     ),
                   ),
-                  child: Image.network(
-                    shop.stallImage,
-                    fit: BoxFit.cover,
-                  ),
+                  child: (timeNow.hour > shop.closingHour.hour ||
+                          timeNow.hour < shop.openingHour.hour ||
+                          (timeNow.hour == shop.closingHour.hour &&
+                              timeNow.minute > shop.closingHour.minute) ||
+                          (timeNow.hour == shop.openingHour.hour &&
+                              timeNow.minute > shop.openingHour.minute))
+                      ? Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            Image.network(
+                              shop.stallImage,
+                              fit: BoxFit.cover,
+                              color: Colors.black45,
+                              colorBlendMode: BlendMode.darken,
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Closed',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            )
+                          ],
+                        )
+                      : Image.network(
+                          shop.stallImage,
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
             ),
